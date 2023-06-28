@@ -6,7 +6,7 @@ const OpenAIApi = axios.create({
     headers: {
         'Content-Type': 'application/json',
         // 'Authorization': `Bearer ${OPENAI_API_KEY}`
-        'Authorization': `Bearer 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`
+        'Authorization': `Bearer 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`
     }
 });
 

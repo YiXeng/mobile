@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import useCompletion from '../hooks/useCompletion';
 
 const ExampleScreen = () => {
-    // Assume this userInput comes from your app state
+   
     const userInput = {
         destination: "Paris",
         budget: "1500",

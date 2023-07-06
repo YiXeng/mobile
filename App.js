@@ -3,13 +3,17 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import ExampleScreen from './src/screens/ExampleScreen';
 import MainScreen from './src/screens/MainScreen';
+import UserInputScreen from './src/screens/UserInputScreen'; 
+
 
 const navigator = createStackNavigator ({
   example: ExampleScreen,
-  main: MainScreen
+  main: MainScreen,
+  input: UserInputScreen
+
 
 }, {
-  initialRouteName: 'main',
+  initialRouteName: 'input',
   defaultNavigationOptions: {
     headerShown: false
   }

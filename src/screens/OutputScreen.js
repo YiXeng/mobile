@@ -1,11 +1,52 @@
 import { FlatList, Pressable, View, Text } from "react-native";
 import OutputComponent from "../components/OutputComponent"; 
+import {withNavigation} from "react-navigation";
 
-export default function OutputScreen({ jsonData }) {
+const mockJsonData = {
+  Location: "Test Location",
+  Dates: {
+    "2023-07-10": {
+      description: "Day 1 Description",
+      Time: {
+        Hour1: {
+          time: "08:00",
+          temperature: "25°C",
+          weather: "Sunny",
+        },
+        Hour2: {
+          time: "09:00",
+          temperature: "27°C",
+          weather: "Sunny",
+        },
+        // add more hours if needed
+      },
+    },
+    "2023-07-11": {
+      description: "Day 2 Description",
+      Time: {
+        Hour1: {
+          time: "08:00",
+          temperature: "24°C",
+          weather: "Cloudy",
+        },
+        Hour2: {
+          time: "09:00",
+          temperature: "26°C",
+          weather: "Cloudy",
+        },
+        // add more hours if needed
+      },
+    },
+    // add more dates if needed
+  },
+};
+
+
+export default function OutputScreen({ jsonData = mockJsonData, navigation }) {
   
     //FIX AND CHECK AND CONFIRM
   function pressHandler() {
-    navigator.navigate("MainScreen");
+    navigation.navigate('main');
   }
 
   //converts the received json file into an array, format attached below

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Button } from 'react-native';
 
-const UserInputScreen = () => {
+const UserInputScreen = ({ navigation }) => {
+  
   const [destination, setDestination] = useState('');
   const [budget, setBudget] = useState('');
   const [dates, setDates] = useState('');
@@ -9,7 +10,7 @@ const UserInputScreen = () => {
   const [lengthOfTour, setLengthOfTour] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (  ) => {
     const userInput = {
       destination,
       budget,
@@ -19,6 +20,7 @@ const UserInputScreen = () => {
       additionalInfo
     };
     console.log(userInput);
+    navigation.navigate('output');
   };
 
   return (

@@ -7,15 +7,15 @@ import { StyleSheet,
 import Constants from 'expo-constants'
 import TravelHistory from '../components/TravelHistory';
 
-
-const MainScreen = (props) => {
+const MainScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
     // const plan = props.travelPlan;
     const plan = 5;
     return (
         <SafeAreaView style = {styles.background}>
             <TouchableOpacity 
-                onPress={()=>{
+                onPress={() => {
                     console.log('User input Page');
+                    navigation.navigate('input'); // Call navigate on the navigation prop
                 }}
                 style={styles.buttonContainer}
             >
@@ -31,6 +31,9 @@ const MainScreen = (props) => {
         </SafeAreaView>
     );
 }
+
+// ... your style definitions and export statement
+
 
 const styles = StyleSheet.create({
     background:{

@@ -2,6 +2,8 @@ import { FlatList, Pressable, View, Text } from "react-native";
 import OutputComponent from "../components/OutputComponent"; 
 import {withNavigation} from "react-navigation";
 
+
+//test
 const mockJsonData = {
   Location: "Test Location",
   Dates: {

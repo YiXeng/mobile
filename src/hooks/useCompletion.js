@@ -7,7 +7,10 @@ const useCompletion = (userInput) => {
     const [data, setData] = useState(null);
 
     // Format prompt for travel planning
-    const prompt = `Plan a travel itinerary for ${userInput.lengthOfTour} days to ${userInput.destination}. The budget is ${userInput.budget} and the dates are ${userInput.dates}. The travel focus is ${userInput.preferences}. ${userInput.additionalInfo || ''}`;
+    const prompt = `Plan a travel itinerary for ${userInput.lengthOfTour} 
+                    days to ${userInput.destination}. The budget is ${userInput.budget} 
+                    and the dates are ${userInput.dates}. The travel focus is ${userInput.preferences}. 
+                    ${userInput.additionalInfo || ''}`;
 
     useEffect(() => {
         getCompletion(prompt)

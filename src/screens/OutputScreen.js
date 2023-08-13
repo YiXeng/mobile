@@ -1,5 +1,12 @@
-import { FlatList, Pressable, View, Text } from "react-native";
-import OutputComponent from "../components/OutputComponent"; 
+import {
+  FlatList,
+  TouchableHighlight,
+  View,
+  Text,
+  useState,
+} from "react-native";
+import OutputComponent from "../components/OutputComponent";
+import { styles } from "../styles/Styles";
 
 //test
 const mockJsonData = {
@@ -41,15 +48,16 @@ const mockJsonData = {
   },
 };
 
+export default function OutputScreen({
+  jsonData = mockJsonData,
+  navigation,
+}) {
 
-export default function OutputScreen({ jsonData = mockJsonData, navigation }) {
-  
-    //FIX AND CHECK AND CONFIRM
+
   function pressHandler() {
     navigation.navigate('main');
   }
 
-  //converts the received json file into an array, format attached below
   const datesData = Object.entries(jsonData.Dates).map(([day, data]) => {
     return {
       day,
@@ -58,15 +66,15 @@ export default function OutputScreen({ jsonData = mockJsonData, navigation }) {
   });
 
   return (
-    <View>
-      <Text>Timeline</Text>
-      <Text>Location: {jsonData.Location}</Text>
+    <View style={styles.wrapper}>
+      <Text style={styles.timeline}>Timeline</Text>
+      <Text style={styles.button}>Location: {jsonData.Location}</Text>
 
       <FlatList
         data={datesData}
         renderItem={({ item }) => (
-          <View>
-            <Text>
+          <View style={{ backgroundColor: "#edf2f4", padding: 3, margin: 10 }}>
+            <Text style={styles.day}>
               {item.day} : {item.description}
             </Text>
             <OutputComponent
@@ -76,13 +84,16 @@ export default function OutputScreen({ jsonData = mockJsonData, navigation }) {
             />
           </View>
         )}
+        style={styles.listContainer}
         keyExtractor={(item, index) => item.day}
       />
 
-      <Pressable onPress={pressHandler}>
-        <Text>Return to Main Screen</Text>
-      </Pressable>
-
+      <TouchableHighlight
+        underlayColor="rgba(255, 255, 255, 0.1)"
+        onPress={pressHandler}
+      >
+        <Text style={styles.button}>Return to Main Screen</Text>
+      </TouchableHighlight>
     </View>
   );
 }

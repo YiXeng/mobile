@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import useCompletion from '../hooks/useCompletion';
 
 const ExampleScreen = () => {
@@ -18,6 +18,8 @@ const ExampleScreen = () => {
 
     if (loading) return (
         <View>
+            {/* ... */}
+            <Text></Text>
             <Text></Text>
             <Text></Text>
             <Text></Text>
@@ -26,17 +28,21 @@ const ExampleScreen = () => {
             <ActivityIndicator size="large" color="#0000ff" />
         </View>
     );
-    if (error) return <Text>Error: {error.message}</Text>;
+
+    if (error) return console.error(error);
 
     return (
-        <View>
+        <ScrollView style={{ padding: 10 }}>
             <Text></Text>
             <Text></Text>
             <Text></Text>
             <Text></Text>
             <Text></Text>
-            <Text>{data}</Text>
-        </View>
+            <Text></Text>
+            <Text></Text>
+            <Text>Data:</Text>
+            <Text>{data ? JSON.stringify(data, null, 2) : "No data available"}</Text>
+        </ScrollView>
     );
 };
 

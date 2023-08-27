@@ -12,7 +12,7 @@ export const getCompletion = async (prompt) => {
     try {
         const response = await OpenAIApi.post('/engines/text-davinci-003/completions', {
             prompt,
-            max_tokens: 1000
+            max_tokens: 3500
         });
         return response.data.choices[0].text;
     } catch (error) {

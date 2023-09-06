@@ -9,7 +9,6 @@ import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
 
 //test
-//move this to the input screen
 const mockJsonData = {
   Location: "Test Location",
   Dates: {
@@ -68,7 +67,6 @@ export default function OutputScreen({
 
   return (
     <View style={styles.wrapper}>
-      
       <Text style={styles.timeline}>Timeline</Text>
       <Text style={styles.button}>Location: {jsonData.Location}</Text>
 

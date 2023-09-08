@@ -1,10 +1,52 @@
 import { FlatList, TouchableHighlight, View, Text, Pressable, NestableScrollContainer } from "react-native";
 import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
+<<<<<<< Updated upstream
+=======
+//test
+// const mockJsonData = {
+//   Location: "Test Location",
+//   Dates: {
+//     "2023-07-10": {
+//       description: "Day 1 Description",
+//       Time: {
+//         Hour1: {
+//           time: "08:00",
+//           temperature: "25°C",
+//           weather: "Sunny",
+//         },
+//         Hour2: {
+//           time: "09:00",
+//           temperature: "27°C",
+//           weather: "Sunny",
+//         },
+//         // add more hours if needed
+//       },
+//     },
+//     "2023-07-11": {
+//       description: "Day 2 Description",
+//       Time: {
+//         Hour1: {
+//           time: "08:00",
+//           temperature: "24°C",
+//           weather: "Cloudy",
+//         },
+//         Hour2: {
+//           time: "09:00",
+//           temperature: "26°C",
+//           weather: "Cloudy",
+//         },
+//         // add more hours if needed
+//       },
+//     },
+//     // add more dates if needed
+//   },
+// };
+>>>>>>> Stashed changes
 
 export default function OutputScreen({ route, navigation }) {
   const { key } = route.params;
@@ -58,8 +100,12 @@ export default function OutputScreen({ route, navigation }) {
 
   return (
     <View style={styles.wrapper}>
+<<<<<<< Updated upstream
       {console.log("Output Screen")}
       <Text style={styles.timeline}>Travel Plan</Text>
+=======
+      <Text style={styles.timeline}>Travel</Text>
+>>>>>>> Stashed changes
       <Text style={styles.button}>Location: {jsonData.Location}</Text>
 
       

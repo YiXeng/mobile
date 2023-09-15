@@ -1,9 +1,11 @@
+
 import { FlatList, TouchableHighlight, View, Text, Pressable, NestableScrollContainer } from "react-native";
 import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
 import { useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function OutputScreen({ route, navigation }) {
@@ -36,8 +38,32 @@ export default function OutputScreen({ route, navigation }) {
       });
   }, []);
 
+  useEffect(() => {
+    AsyncStorage.getItem(key)
+      .then((data) => {
+        const jData = JSON.parse(data);
+        const processedDatesData = Object.entries(jData.Dates).map(
+          ([day, data]) => {
+            return {
+              day,
+              ...data,
+            };
+          }
+        );
+        setJsonData(jData);
+        setDatesData(processedDatesData);
+        setIsDataFetched(true); 
+        setIsLoading(false); 
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false); 
+      });
+  }, []);
+  
   function pressHandler() {
     navigation.navigate("main");
+
   }
 
   if (isLoading) {
@@ -57,9 +83,12 @@ export default function OutputScreen({ route, navigation }) {
   }
 
   return (
+    
+
     <View style={styles.wrapper}>
       {console.log("Output Screen")}
       <Text style={styles.timeline}>Travel Plan</Text>
+
       <Text style={styles.button}>Location: {jsonData.Location}</Text>
 
       

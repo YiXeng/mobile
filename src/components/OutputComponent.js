@@ -14,6 +14,7 @@ export default function OutputComponent(props) {
           <HourComponent hour={item} />
         </View>
       )}
+      //test
       keyExtractor={(item, index) => Object.keys(item)[0]}
     />
   );

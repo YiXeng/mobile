@@ -14,9 +14,10 @@ const UserInputScreen = ({ navigation }) => {
   //test
   const mockJsonData = {
     Location: "Test Location",
+    DatesSummary: "July 10-14",
     Dates: {
       "2023-07-10": {
-        description: "Day 1 Description",
+        description: "Day 1",
         Time: {
           Hour1: {
             time: "08:00",
@@ -28,11 +29,58 @@ const UserInputScreen = ({ navigation }) => {
             temperature: "27°C",
             weather: "Sunny",
           },
+          Hour3: {
+            time: "10:00",
+            temperature: "27°C",
+            weather: "Sunny",
+          },
+          Hour4: {
+            time: "11:00",
+            temperature: "27°C",
+            weather: "Sunny",
+          },
+          Hour5: {
+            time: "12:00",
+            temperature: "27°C",
+            weather: "Sunny",
+          },
           // add more hours if needed
         },
       },
       "2023-07-11": {
-        description: "Day 2 Description",
+        description: "Day 2",
+        Time: {
+          Hour1: {
+            time: "08:00",
+            temperature: "24°C",
+            weather: "Cloudy",
+          },
+          Hour2: {
+            time: "09:00",
+            temperature: "26°C",
+            weather: "Cloudy",
+          },
+          // add more hours if needed
+        },
+      },
+      "2023-07-12": {
+        description: "Day 3",
+        Time: {
+          Hour1: {
+            time: "08:00",
+            temperature: "24°C",
+            weather: "Cloudy",
+          },
+          Hour2: {
+            time: "09:00",
+            temperature: "26°C",
+            weather: "Cloudy",
+          },
+          // add more hours if needed
+        },
+      },
+      "2023-07-14": {
+        description: "Day 4",
         Time: {
           Hour1: {
             time: "08:00",

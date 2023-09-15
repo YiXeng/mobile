@@ -150,7 +150,7 @@ export default function OutputScreen({ route, navigation }) {
         underlayColor="rgba(255, 255, 255, 0.1)"
         onPress={pressHandler}
       >
-        <Text style={styles.button}>Return to Main Srcreen</Text>
+        <Text style={styles.button}>Return to Main Screen</Text>
       </TouchableHighlight>
 
       <View style={{padding: 50}}/>

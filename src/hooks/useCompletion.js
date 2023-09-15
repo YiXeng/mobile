@@ -52,10 +52,8 @@ const useCompletion = (userInput) => {
                                 "weather": "Sunny"
                                 
                               }
-                              // add more hours if needed
                             }
                           }
-                          // add more dates if needed
                         }
                       }`;
 

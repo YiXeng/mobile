@@ -1,0 +1,1 @@
+// Animation when waiting response form gpt

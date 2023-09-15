@@ -1,73 +1,67 @@
-import {
-  FlatList,
-  TouchableHighlight,
-  View,
-  Text,
-  useState,
-} from "react-native";
+import { FlatList, TouchableHighlight, View, Text } from "react-native";
 import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
+import { useEffect, useState } from "react";
 
-//test
-const mockJsonData = {
-  Location: "Test Location",
-  Dates: {
-    "2023-07-10": {
-      description: "Day 1 Description",
-      Time: {
-        Hour1: {
-          time: "08:00",
-          temperature: "25°C",
-          weather: "Sunny",
-        },
-        Hour2: {
-          time: "09:00",
-          temperature: "27°C",
-          weather: "Sunny",
-        },
-        // add more hours if needed
-      },
-    },
-    "2023-07-11": {
-      description: "Day 2 Description",
-      Time: {
-        Hour1: {
-          time: "08:00",
-          temperature: "24°C",
-          weather: "Cloudy",
-        },
-        Hour2: {
-          time: "09:00",
-          temperature: "26°C",
-          weather: "Cloudy",
-        },
-        // add more hours if needed
-      },
-    },
-    // add more dates if needed
-  },
-};
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function OutputScreen({
-  jsonData = mockJsonData,
-  navigation,
-}) {
+export default function OutputScreen({ route, navigation }) {
+  const { key } = route.params;
+  const [jsonData, setJsonData] = useState({});
+  const [datesData, setDatesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
-
+  useEffect(() => {
+    AsyncStorage.getItem(key)
+      .then((data) => {
+        const jData = JSON.parse(data);
+        const processedDatesData = Object.entries(jData.Dates).map(
+          ([day, data]) => {
+            return {
+              day,
+              ...data,
+            };
+          }
+        );
+        setJsonData(jData);
+        setDatesData(processedDatesData);
+        setIsDataFetched(true); 
+        setIsLoading(false); 
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false); 
+      });
+  }, []);
+  
   function pressHandler() {
-    navigation.navigate('main');
+    navigation.navigate("main");
   }
 
-  const datesData = Object.entries(jsonData.Dates).map(([day, data]) => {
-    return {
-      day,
-      ...data,
-    };
-  });
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (!isDataFetched) {
+    return (
+      <View>
+        <Text>Error fetching data.</Text>
+      </View>
+    );
+  }
 
   return (
+    
+
     <View style={styles.wrapper}>
+      {console.log("Output Screen")}
       <Text style={styles.timeline}>Timeline</Text>
+
       <Text style={styles.button}>Location: {jsonData.Location}</Text>
 
       <FlatList

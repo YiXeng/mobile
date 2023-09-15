@@ -1,3 +1,4 @@
+//comment this out for output screen to function properly
 {
     "parser": "babel-eslint",
     "parserOptions": {

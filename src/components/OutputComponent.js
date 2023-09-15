@@ -1,6 +1,6 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Dimensions } from "react-native";
 import HourComponent from "./HourComponent";
-
+const screenHeight = Dimensions.get('window').height;
 export default function OutputComponent(props) {
   const hourArr = Object.keys(props.timeData).map((key) => ({
     [key]: props.timeData[key],
@@ -16,6 +16,7 @@ export default function OutputComponent(props) {
       )}
       //test
       keyExtractor={(item, index) => Object.keys(item)[0]}
+      style={{height: 400}}
     />
   );
 }

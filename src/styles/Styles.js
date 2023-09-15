@@ -28,6 +28,14 @@ export const styles = StyleSheet.create({
     fontWeight: "bold"
     
   },
+  outputcomponent: {
+    padding: 20,
+    backgroundColor: '#1f1e33',
+    borderRadius: 10,
+    justifyContent: "center",
+    textAlign: "center",
+    height: 250,
+  },
   button: {
     backgroundColor: "#4a4e69",
     color: "white",

@@ -94,7 +94,7 @@ export default function OutputScreen({ route, navigation }) {
         source={require('../../assets/rec.png')}
         style={{ width: 30, height: 30, paddingBottom: 5, paddingTop: 5, marginBottom: 10, marginTop: 18}}
       />
-      <Text style={styles.timeline}>Travel Plan August {jsonData.DatesSummary}</Text>
+      <Text style={styles.timeline}>Travel Plan {jsonData.DatesSummary}</Text>
       </View>
       {/* <Text style={styles.timeline}>Travel</Text> */}
 

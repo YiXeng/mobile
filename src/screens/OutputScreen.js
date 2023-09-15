@@ -1,47 +1,10 @@
-import { FlatList, TouchableHighlight, View, Text, Pressable, NestableScrollContainer } from "react-native";
+import { FlatList, TouchableHighlight, View, Text, Pressable, NestableScrollContainer,Image  } from "react-native";
 import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 
-//test
-// const mockJsonData = {
-//   Location: "Test Location",
-//   Dates: {
-//     "2023-07-10": {
-//       description: "Day 1 Description",
-//       Time: {
-//         Hour1: {
-//           time: "08:00",
-//           temperature: "25°C",
-//           weather: "Sunny",
-//         },
-//         Hour2: {
-//           time: "09:00",
-//           temperature: "27°C",
-//           weather: "Sunny",
-//         },
-//         // add more hours if needed
-//       },
-//     },
-//     "2023-07-11": {
-//       description: "Day 2 Description",
-//       Time: {
-//         Hour1: {
-//           time: "08:00",
-//           temperature: "24°C",
-//           weather: "Cloudy",
-//         },
-//         Hour2: {
-//           time: "09:00",
-//           temperature: "26°C",
-//           weather: "Cloudy",
-//         },
-//         // add more hours if needed
-//       },
-//     },
-//     // add more dates if needed
-//   },
-// };
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function OutputScreen({ route, navigation }) {
   const { key } = route.params;
@@ -95,8 +58,20 @@ export default function OutputScreen({ route, navigation }) {
 
   return (
     <View style={styles.wrapper}>
-      <Text style={styles.timeline}>Timeline</Text>
-      <Text style={styles.button}>Location: {jsonData.Location}</Text>
+
+      {/* <Text style={styles.timeline}>Timeline</Text> */}
+
+      {console.log("Output Screen")}
+    <View style={styles.OutputTitle}>
+      <Image
+        source={require('../../assets/rec.png')}
+        style={{ width: 30, height: 30, paddingBottom: 5, paddingTop: 5, marginBottom: 10, marginTop: 18}}
+      />
+      <Text style={styles.timeline}>Travel Plan August 4-7</Text>
+      </View>
+      {/* <Text style={styles.timeline}>Travel</Text> */}
+
+      <Text style={styles.location}>{jsonData.Location}</Text>
 
       
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -104,32 +79,38 @@ export default function OutputScreen({ route, navigation }) {
       <View
         style={styles.outputcomponent}
       >
-        <Text style={{textAlign: "center", fontSize: 20, color: 'white'}}>Packing List</Text>
+        <Text style={styles.ComponentTitle}>Packing List</Text>
       </View>
       <View style={{padding: 10}}/>
+
       <View
         style={styles.outputcomponent}
       >
-        <Text style={{textAlign: "center", fontSize: 20, color: 'white'}}>Navigation</Text>
+        <Text style={styles.ComponentTitle}>Navigation</Text>
       </View>
+
+
+
       <View style={{padding: 10}}/>
+
+
+
       <View style={styles.outputcomponent}>
-        <Text style={{textAlign: "center", fontSize: 20, color: 'white'}}>Schedule</Text>
+        <Text style={styles.ComponentTitle}>Schedule</Text>
         <FlatList
         data={datesData}
         renderItem={({ item }) => (
-          <View style={{padding: 3, margin: 10 }}>
+          <View style={{padding: 10 }}>
             <Pressable
+            
             onPress={() => {
               navigation.navigate("day", { passedData: {day: item.day, description: item.description, timeData: item.Time, key: key} })
             }}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed ? "gray" : "",
-              },
-            ]}><Text style={styles.day}>
+            style={styles.day}>
+              <Text style={styles.IndividualText}>
               {item.day} : {item.description}
-            </Text></Pressable>
+            </Text>
+            </Pressable>
           
           </View>
         )}
@@ -142,7 +123,7 @@ export default function OutputScreen({ route, navigation }) {
         underlayColor="rgba(255, 255, 255, 0.1)"
         onPress={pressHandler}
       >
-        <Text style={styles.button}>Return to Main Screen</Text>
+        <Text style={styles.button}>Return to Main Srcreen</Text>
       </TouchableHighlight>
 
       <View style={{padding: 50}}/>

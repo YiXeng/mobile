@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, StyleSheet, Button } from 'react-native';
+import { View, TextInput, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import AddIcon from '@mui/icons-material/Add';
 
 const UserInputScreen = ({ navigation }) => {
   
@@ -9,6 +10,11 @@ const UserInputScreen = ({ navigation }) => {
   const [preferences, setPreferences] = useState('');
   const [lengthOfTour, setLengthOfTour] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
+  const [more, setMore] = useState(true)
+
+  const addMore = () => {
+    setMore(!more)
+  }
 
   const handleSubmit = (  ) => {
     const userInput = {
@@ -22,6 +28,8 @@ const UserInputScreen = ({ navigation }) => {
     console.log(userInput);
     navigation.navigate('output');
   };
+
+
 
   return (
     <View style={styles.container}>
@@ -67,6 +75,16 @@ const UserInputScreen = ({ navigation }) => {
         onChangeText={setAdditionalInfo} 
       />
 
+      {more ? (
+        <TouchableOpacity onPress={addMore} style={styles.moreButton}>
+          <AddIcon />
+          <Text style={styles.moreText}>Add More</Text>
+        </TouchableOpacity>
+      ) : <View>
+        <Text>More Info</Text>
+        <TextInput style={styles.input}/>
+        </View>}
+
       <Button 
         title="Submit" 
         onPress={handleSubmit}
@@ -88,6 +106,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     paddingLeft: 10,
+  },
+  moreButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  moreText: {
+    fontSize: 20,
+    marginLeft: 10,
   },
 });
 

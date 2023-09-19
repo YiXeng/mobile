@@ -7,9 +7,9 @@ const ExampleScreen = () => {
     const userInput = {
         destination: "Paris",
         budget: "1500",
-        dates: "July 10th - July 20th",
+        dates: "July 10th - July 14th",
         preferences: "sightseeing, food, history",
-        lengthOfTour: "10",
+        lengthOfTour: "4",
         additionalInfo: "Interested in local cuisines and art museums."
         // Add more fields as needed
     };

@@ -1,113 +1,50 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, Button } from "react-native";
+import { View, TextInput, Text, StyleSheet, Button, ActivityIndicator } from "react-native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useCompletion from '../hooks/useCompletion';
 
 const UserInputScreen = ({ navigation }) => {
+
   const [destination, setDestination] = useState("");
   const [budget, setBudget] = useState("");
   const [dates, setDates] = useState("");
   const [preferences, setPreferences] = useState("");
   const [lengthOfTour, setLengthOfTour] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
-  
-  //test
-  const mockJsonData = {
-    Location: "Test Location",
-    DatesSummary: "July 10-14",
-    Dates: {
-      "2023-07-10": {
-        description: "Day 1",
-        Time: {
-          Hour1: {
-            time: "08:00",
-            temperature: "25°C",
-            weather: "Sunny",
-          },
-          Hour2: {
-            time: "09:00",
-            temperature: "27°C",
-            weather: "Sunny",
-          },
-          Hour3: {
-            time: "10:00",
-            temperature: "27°C",
-            weather: "Sunny",
-          },
-          Hour4: {
-            time: "11:00",
-            temperature: "27°C",
-            weather: "Sunny",
-          },
-          Hour5: {
-            time: "12:00",
-            temperature: "27°C",
-            weather: "Sunny",
-          },
-          // add more hours if needed
-        },
-      },
-      "2023-07-11": {
-        description: "Day 2",
-        Time: {
-          Hour1: {
-            time: "08:00",
-            temperature: "24°C",
-            weather: "Cloudy",
-          },
-          Hour2: {
-            time: "09:00",
-            temperature: "26°C",
-            weather: "Cloudy",
-          },
-          // add more hours if needed
-        },
-      },
-      "2023-07-12": {
-        description: "Day 3",
-        Time: {
-          Hour1: {
-            time: "08:00",
-            temperature: "24°C",
-            weather: "Cloudy",
-          },
-          Hour2: {
-            time: "09:00",
-            temperature: "26°C",
-            weather: "Cloudy",
-          },
-          // add more hours if needed
-        },
-      },
-      "2023-07-14": {
-        description: "Day 4",
-        Time: {
-          Hour1: {
-            time: "08:00",
-            temperature: "24°C",
-            weather: "Cloudy",
-          },
-          Hour2: {
-            time: "09:00",
-            temperature: "26°C",
-            weather: "Cloudy",
-          },
-          // add more hours if needed
-        },
-      },
-      // add more dates if needed
-    },
-  };
 
+  // const [mockJsonData, setmockJsonData] = useState("");
+  // const [bool, setbool] = useState("");
+
+  // if (bool){
+  //   const { loading, error, data, isValidJSON } = useCompletion({
+  //     destination,
+  //     budget,
+  //     dates,
+  //     preferences,
+  //     lengthOfTour,
+  //     additionalInfo,
+  //   });
+  // };
+  
+  
   // testing purposes
-  const handleSaveData = async () => {
-    try {
-      const jsonValue = JSON.stringify(mockJsonData);
-      await AsyncStorage.setItem('1', jsonValue);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSaveData = async () => {
+  //   try {
+  //     const jsonValue = JSON.stringify(mockJsonData);
+  //     await AsyncStorage.setItem('1', jsonValue);
+  //     console.log("in handle save data.");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const outputScreenHandler = () =>{
+    setmockJsonData(data),
+    handleSaveData(),
+    navigation.navigate("output", { key: '1' })
+  }
+
 
   const handleSubmit = () => {
     const userInput = {
@@ -118,13 +55,31 @@ const UserInputScreen = ({ navigation }) => {
       lengthOfTour,
       additionalInfo,
     };
-    console.log(userInput);
-    handleSaveData();
-    navigation.navigate("output", { key: '1' });
+    console.log("userinputscreen",userInput);
+
+    navigation.navigate("example", { key: {userInput} });
+    
+    // if (error) return console.error(error);
+    
   };
+
+  
+  // if (loading) return (
+  //   <View>
+  //       {/* ... */}
+  //       <Text></Text>
+  //       <Text></Text>
+  //       <Text></Text>
+  //       <Text></Text>
+  //       <Text></Text>
+  //       <Text></Text>
+  //       <ActivityIndicator size="large" color="#0000ff" />
+  //   </View>
+  // );
 
   return (
     <View style={styles.container}>
+      
       <Text>Destination</Text>
       <TextInput
         style={styles.input}

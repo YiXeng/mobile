@@ -131,11 +131,11 @@ export default function OutputScreen({ route, navigation }) {
             <Pressable
             
             onPress={() => {
-              navigation.navigate("day", { passedData: {day: item.day, description: item.description, timeData: item.Time, key: key} })
+              navigation.navigate("day", { passedData: {day: item.day, description: item.IndividualDay, timeData: item.Time, key: key} })
             }}
             style={styles.day}>
               <Text style={styles.IndividualText}>
-              {item.day} : {item.description}
+              {item.day} : {item.IndividualDay}
             </Text>
             </Pressable>
           

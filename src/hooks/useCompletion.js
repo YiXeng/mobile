@@ -21,7 +21,7 @@ const isResponseValidJSON = (jsonData) => {
     return true;
 };
 
-const useCompletion = (userInput) => {
+const useCompletion = ({userInput}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
@@ -33,7 +33,7 @@ const useCompletion = (userInput) => {
                     days to ${userInput.destination}. The budget is ${userInput.budget} 
                     and the dates are ${userInput.dates}. The travel focus is ${userInput.preferences}. 
                     ${userInput.additionalInfo || ''} Please return the response in JSON-compatible format. 
-                    Make sure to enclose all keys in double quotes. Follow the following example, but fill in your
+                    Make sure to enclose all keys in double quotes. Follow the following example, but please fulfill in your
                     informations in each place holder like time, activityname, description... Do not leave them blank. Please make sure that 
                     the hours has been spread out in the full day and you can add more hours if needed: 
                     {
@@ -76,6 +76,9 @@ const useCompletion = (userInput) => {
 
 
     useEffect(() => {
+
+    console.log("usecompletion",userInput);
+    console.log(prompt);
     getCompletion(prompt)
         .then(response => {
         console.log("Received response:", response);  // Debugging log

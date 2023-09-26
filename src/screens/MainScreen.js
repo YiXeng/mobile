@@ -32,7 +32,7 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
 
 
             <SafeAreaView style={{flexDirection: 'row', marginBottom: 10}}>
-                <Image source={require('../components/images/location_icon.png')}
+                <Image source={require('../components/location_icon.png')}
                 style={styles.locationIcon}/> 
                 <Text style = {styles.locationText}>Beijing</Text> 
                 <Text style = {styles.logOutText}>Log out</Text> 
@@ -45,7 +45,7 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
 
 
                 <ImageBackground
-                source={require('../components/images/backgroundPic.png')}
+                source={require('../components/backgroundPic.png')}
                 style={styles.image}>
 
                     <Text style = {styles.placeText}>ON, CANAD</Text>
@@ -62,7 +62,7 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
 
                 </ImageBackground>
 
-                <Image source={require('../components/images/time_icon.png')}
+                <Image source={require('../components/time_icon.png')}
                     style={styles.timeIcon}/> 
                     <Text style = {styles.travelText}>Travel History</Text> 
         

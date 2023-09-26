@@ -1,20 +1,61 @@
 import { StyleSheet, 
     Text, 
+    ImageBackground,
     SafeAreaView, 
     TouchableOpacity,} from 'react-native';
 
 
 const TravelHistory = ({ touchableCount }) => {
+
+  const getRandomDate = () => {
+    // Generate a random month (0-11) and day (1-31)
+    const randomMonth = Math.floor(Math.random() * 12);
+    const randomDay = Math.floor(Math.random() * 31) + 1;
+
+    // Define an array of month names
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    // Get the month name based on the random month
+    const monthName = months[randomMonth];
+
+    // Format the date as "Month Day"
+    const formattedDate = `${monthName} ${randomDay}`;
+
+    // Display the formatted date
+    return formattedDate;
+  };
+
+
+
+
   const renderTouchable = () => {
+
     const touchableOpacityArray = [];
+
     for (let i = 0; i < touchableCount; i++) {
+      image = 'https://picsum.photos/200/300'
       touchableOpacityArray.push(
+
+
         <TouchableOpacity 
         key={i} 
         onPress={() => handleTouchablePress(i+1)}
         style={styles.historyContainer}>
-          <Text style = {styles.historyText}>Your travel history {i+1}</Text>
+        
+          <ImageBackground
+          source={{ uri: image }}
+          style={styles.imageContainer}
+          resizeMode="cover">
+            <Text style = {styles.dateText}>{getRandomDate()}</Text>
+          </ImageBackground>
+
         </TouchableOpacity>
+        
+
+
       );
     }
     return touchableOpacityArray;
@@ -33,19 +74,20 @@ const TravelHistory = ({ touchableCount }) => {
 };
 
 const styles = StyleSheet.create({
-    historyContainer:{
-        height: 70,
-        width: 300,
+    imageContainer:{
+        height: 160,
+        width: 385,
         marginVertical: 15,
-        backgroundColor: '#5d57ff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 8,
+        borderRadius: 10,
+        overflow: 'hidden',
     },
-    historyText:{
-        color:'#fff',
-        fontSize: 25,
-    }
+    dateText:{
+      fontSize: 24,
+      color: 'white',
+      marginLeft: 30,
+      marginTop: 110,
+      fontWeight: 'bold'
+  },
 })
 
 export default TravelHistory;

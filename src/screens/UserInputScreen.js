@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, Button, ActivityIndicator, ScrollView } from "react-native";
+import { View, TextInput, Text, StyleSheet, Button, ActivityIndicator, ScrollView, TouchableHighlight,Dimensions } from "react-native";
 
 // ... (other imports)
-
+const { width, height } = Dimensions.get('window');
 const UserInputScreen = ({ navigation }) => {
+
   const [destination, setDestination] = useState("");
   const [budget, setBudget] = useState("");
   const [dates, setDates] = useState("");
@@ -39,6 +40,7 @@ const UserInputScreen = ({ navigation }) => {
             placeholder="Your final destination"
             placeholderTextColor="#A9A9A9"
           />
+          <View style={styles.inputContainer}></View>
         </View>
 
         <View style={styles.bubble}>
@@ -50,6 +52,7 @@ const UserInputScreen = ({ navigation }) => {
             placeholder="Your budget"
             placeholderTextColor="#A9A9A9"
           />
+          <View style={styles.inputContainer}></View>
         </View>
 
         <View style={styles.bubble}>
@@ -61,6 +64,7 @@ const UserInputScreen = ({ navigation }) => {
             placeholder="Your starting point"
             placeholderTextColor="#A9A9A9"
           />
+          <View style={styles.inputContainer}></View>
         </View>
 
         <View style={styles.bubble}>
@@ -72,6 +76,7 @@ const UserInputScreen = ({ navigation }) => {
             placeholder="Your final destination"
             placeholderTextColor="#A9A9A9"
           />
+          <View style={styles.inputContainer}></View>
         </View>
 
         <View style={styles.bubble}>
@@ -80,10 +85,19 @@ const UserInputScreen = ({ navigation }) => {
             style={styles.input}
             value={preferences}
             onChangeText={setPreferences}
+            placeholder="Your final destination"
+            placeholderTextColor="#A9A9A9"
           />
+          <View style={styles.inputContainer}></View>
         </View>
 
-        <Button title="Submit" onPress={handleSubmit} />
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor="darkgrey" // Change the color when pressed
+          onPress={handleSubmit}
+        >
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableHighlight>
       </View>
     </ScrollView>
   );
@@ -95,45 +109,63 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   tit: {
-    margin: 25,
+    alignSelf: 'center',
+    marginLeft: width * 0.01,
+    marginRight: width * 0.01,
+    marginTop: height * 0.08,
+    marginBottom: height * 0.03,
     justifyContent: "center",
-    fontSize: 25,
+    fontSize: width * 0.07,
     fontWeight: "bold",
   },
   label: {
     alignSelf: 'center',
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: width * 0.05,
+    marginBottom: height * 0.015,
   },
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: width * 0.1,
   },
   inputContainer: {
     flexDirection: 'row',
     alignSelf: 'center',
     alignItems: 'center',
-    margin: 7,
+    marginVertical: height * 0.01,
     borderBottomWidth: 1,
     borderBottomColor: 'black', // Change the color as needed
-    width: '80%', // Adjust the width as needed
+    width: width * 0.6,
   },
   input: {
     alignSelf: 'center',
     alignItems: 'center',
-    paddingVertical: 5,
-    fontSize: 16,
+    paddingVertical: height * 0.015,
+    fontSize: width * 0.04,
   },
   bubble: {
     alignContent: 'center',
     backgroundColor: 'transparent', // Background color for the bubble
     borderWidth: 3,
-    borderRadius: 10, // Border radius to create rodunded corners
-    padding: 10, // Padding inside the bubble
-    marginBottom: 10, // Spacing between bubbles
+    borderRadius: width * 0.02, // Border radius to create rounded corners
+    padding: width * 0.04, // Padding inside the bubble
+    marginBottom: height * 0.02, // Spacing between bubbles
     width: '100%', // Adjust the width as needed
-  }
+  },
+  button: {
+    backgroundColor: 'lightgrey',
+    paddingVertical: height * 0.03,
+    paddingHorizontal: width * 0.08,
+    borderRadius: width * 0.01,
+    marginBottom: height * 0.04,
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: width * 0.04,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });
+
 
 export default UserInputScreen;

@@ -5,6 +5,7 @@ import { StyleSheet,
     ScrollView,
     Image,
     ImageBackground,
+    Dimensions,
     View,} from 'react-native'
 import Constants from 'expo-constants'
 import TravelHistory from '../components/TravelHistory'
@@ -40,7 +41,7 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
             <ScrollView>
                 <DateTimeDisplay />
 
-                <Text style = {styles.greetingText}> Hi David！</Text>
+                <Text style = {styles.greetingText}> Hi David !</Text>
                 <Text style = {styles.greetingText}> Are you looking for a trip?</Text>
 
 
@@ -57,7 +58,7 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
                         }}
                     style={styles.buttonContainer}>
 
-                        <Text style = {styles.buttonText}>Get Started -></Text>
+                        <Text style = {styles.buttonText}>Get Started -</Text>
                     </TouchableOpacity>
 
                 </ImageBackground>
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         height: 35,
         width: 100,
-        marginHorizontal: 260,
+        marginHorizontal: (Dimensions.get('window').width - 170),
         marginTop: -20,
         backgroundColor: '#fff',
         justifyContent: 'center',
@@ -164,11 +165,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: 385,
         height: 270,
+        width: (Dimensions.get('window').width - 50),
         marginVertical: 30,
         marginHorizontal: 22,
         overflow: 'hidden',
+
     },
     
 });
 
 export default MainScreen;
+
+

@@ -1,19 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import useCompletion from '../hooks/useCompletion';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ExampleScreen = () => {
-   
-    const userInput = {
-        destination: "Paris",
-        budget: "1500",
-        dates: "July 10th - July 20th",
-        preferences: "sightseeing, food, history",
-        lengthOfTour: "10",
-        additionalInfo: "Interested in local cuisines and art museums."
-        // Add more fields as needed
+const ExampleScreen = ({ route, navigation }) => {
+    const { key } = route.params;
+    const [userInput, setUserInput] = useState(key)
+    // const userInput = {
+    //     destination: "Paris",
+    //     budget: "1500",
+    //     dates: "July 10th - July 14th",
+    //     preferences: "sightseeing, food, history",
+    //     lengthOfTour: "4",
+    //     additionalInfo: "Interested in local cuisines and art museums."
+    //     // Add more fields as needed
+    // };
+      
+    const handleSaveData = async () => {
+        try {
+        const jsonValue = JSON.stringify(data);
+        await AsyncStorage.setItem('1', jsonValue);
+        console.log("in handle save data.");
+        } catch (error) {
+        console.log(error);
+        }
     };
-    
+
+    const handleSubmit = () => {
+        handleSaveData();
+        // console.log(userInput);
+        // setUserInput(key);
+        navigation.navigate("output", { key: '1' });
+    };
+
     const { loading, error, data } = useCompletion(userInput);
 
     if (loading) return (
@@ -33,6 +52,9 @@ const ExampleScreen = () => {
 
     return (
         <ScrollView style={{ padding: 10 }}>
+            {console.log("examplescreen",userInput)}
+            {console.log("key:",key)}
+            {handleSubmit()}
             <Text></Text>
             <Text></Text>
             <Text></Text>

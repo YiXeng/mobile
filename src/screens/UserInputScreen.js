@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import AddIcon from '@mui/icons-material/Add';
 
+// ... (other imports)
+const { width, height } = Dimensions.get('window');
 const UserInputScreen = ({ navigation }) => {
   
   const [destination, setDestination] = useState('');
@@ -94,6 +96,25 @@ const UserInputScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+  },
+  tit: {
+    alignSelf: 'center',
+    marginLeft: width * 0.01,
+    marginRight: width * 0.01,
+    marginTop: height * 0.08,
+    marginBottom: height * 0.03,
+    justifyContent: "center",
+    fontSize: width * 0.07,
+    fontWeight: "bold",
+  },
+  label: {
+    alignSelf: 'center',
+    fontSize: width * 0.05,
+    marginBottom: height * 0.015,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -116,5 +137,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
+
 
 export default UserInputScreen;

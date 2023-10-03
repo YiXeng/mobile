@@ -4,7 +4,8 @@ import { View, TextInput, Text, StyleSheet, Button, ActivityIndicator } from "re
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useCompletion from '../hooks/useCompletion';
 
-const UserInputScreen = ({ navigation }) => {
+const UserInputScreen = ({ route, navigation }) => {
+  const {key} = route.params;
 
   const [destination, setDestination] = useState("");
   const [budget, setBudget] = useState("");
@@ -39,11 +40,11 @@ const UserInputScreen = ({ navigation }) => {
   //   }
   // };
 
-  const outputScreenHandler = () =>{
-    setmockJsonData(data),
-    handleSaveData(),
-    navigation.navigate("output", { key: '1' })
-  }
+  // const outputScreenHandler = () =>{
+  //   setmockJsonData(data),
+  //   handleSaveData(),
+  //   navigation.navigate("output", { key: '1' })
+  // }
 
 
   const handleSubmit = () => {
@@ -57,7 +58,7 @@ const UserInputScreen = ({ navigation }) => {
     };
     console.log("userinputscreen",userInput);
 
-    navigation.navigate("example", { key: {userInput} });
+    navigation.navigate("example", { key1: {userInput}, key2: key });
     
     // if (error) return console.error(error);
     

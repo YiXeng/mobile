@@ -4,7 +4,8 @@ import useCompletion from '../hooks/useCompletion';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ExampleScreen = ({ route, navigation }) => {
-    const { key } = route.params;
+    const key  = route.params.key1;
+    const asynckey = route.params.key2;
     const [userInput, setUserInput] = useState(key)
     // const userInput = {
     //     destination: "Paris",
@@ -19,7 +20,7 @@ const ExampleScreen = ({ route, navigation }) => {
     const handleSaveData = async () => {
         try {
         const jsonValue = JSON.stringify(data);
-        await AsyncStorage.setItem('1', jsonValue);
+        await AsyncStorage.setItem(asynckey, jsonValue);
         console.log("in handle save data.");
         } catch (error) {
         console.log(error);
@@ -30,7 +31,7 @@ const ExampleScreen = ({ route, navigation }) => {
         handleSaveData();
         // console.log(userInput);
         // setUserInput(key);
-        navigation.navigate("output", { key: '1' });
+        navigation.navigate("output", { key: asynckey });
     };
 
     const { loading, error, data } = useCompletion(userInput);

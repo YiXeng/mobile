@@ -4,7 +4,7 @@ import { StyleSheet,
     TouchableOpacity,} from 'react-native';
 
 
-const TravelHistory = ({ touchableCount }) => {
+const TravelHistory = ({ touchableCount,navigation }) => {
   const renderTouchable = () => {
     const touchableOpacityArray = [];
     for (let i = 0; i < touchableCount; i++) {
@@ -22,6 +22,7 @@ const TravelHistory = ({ touchableCount }) => {
 
   const handleTouchablePress = (identifier) => {
     console.log(`Touchable ${identifier} pressed!`);
+    navigation.navigate("output", {key: identifier.toString()});
     // 执行你希望的Touchable点击事件处理逻辑
   };
 

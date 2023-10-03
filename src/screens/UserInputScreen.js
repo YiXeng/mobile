@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, Button, ActivityIndicator } from "react-native";
+import { View, TextInput, Text, StyleSheet, Button, ActivityIndicator, TouchableOpacity } from "react-native";
+// import AddIcon from '@mui/icons-material/Add';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useCompletion from '../hooks/useCompletion';
@@ -11,7 +12,13 @@ const UserInputScreen = ({ navigation }) => {
   const [dates, setDates] = useState("");
   const [preferences, setPreferences] = useState("");
   const [lengthOfTour, setLengthOfTour] = useState("");
-  const [additionalInfo, setAdditionalInfo] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState(true);
+  const [moreInfoText, setMoreInfoText] = useState("");
+
+
+  const addMore = () => {
+    setAdditionalInfo(!additionalInfo)
+  }
 
   // const [mockJsonData, setmockJsonData] = useState("");
   // const [bool, setbool] = useState("");
@@ -140,6 +147,21 @@ const UserInputScreen = ({ navigation }) => {
       <View style={styles.inputContainer}></View> 
       </View>
 
+      {additionalInfo ? (
+        <TouchableOpacity onPress={addMore} style={styles.label}>
+      
+          <Text style={styles.label}>Add More</Text>
+        </TouchableOpacity>
+      ) : <View style = {styles.bubble}>
+        <Text style={styles.label}>More Info</Text>
+        <TextInput 
+          style={styles.input}
+          value={moreInfoText}
+          onChangeText={setMoreInfoText}
+        />
+        <View style={styles.inputContainer}></View>
+        </View>}
+
       <Button title="Submit" onPress={handleSubmit} />
     </View>
   );
@@ -189,7 +211,9 @@ const styles = StyleSheet.create({
     padding: 10, // Padding inside the bubble
     marginBottom: 10, // Spacing between bubbles
     width: '100%', // Adjust the width as needed
-  }
+  },
+
+
 
 });
 

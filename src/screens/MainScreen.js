@@ -1,21 +1,43 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, 
     Text, 
     SafeAreaView, 
     TouchableOpacity,
     ScrollView,
-    View,} from 'react-native'
+    View } from 'react-native';
+
 import Constants from 'expo-constants'
 import TravelHistory from '../components/TravelHistory';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 const MainScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
-    // const plan = props.travelPlan;
-    const plan = 5;
+    const [numKeys, setNumKeys] = useState();
+
+    const getNumberOfKeys = async () => {
+        try {
+          const keys = await AsyncStorage.getAllKeys();
+          const numberOfKeys = keys.length;
+          return numberOfKeys;
+        } catch (error) {
+          console.error("Error getting number of keys:", error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchNumberOfKeys = async () => {
+            const numberOfKeys = await getNumberOfKeys();
+            setNumKeys(numberOfKeys);
+        };
+
+        fetchNumberOfKeys();
+    }, []); 
+
     return (
         <SafeAreaView style = {styles.background}>
             <TouchableOpacity 
                 onPress={() => {
                     console.log('User input Page');
-                    navigation.navigate('input'); // Call navigate on the navigation prop
+                    navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
                 }}
                 style={styles.buttonContainer}
             >
@@ -25,7 +47,7 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
             <View style={styles.historyContainer}>
                 <Text style = {styles.historyText}>History</Text>
                 <ScrollView>
-                    <TravelHistory touchableCount ={plan}/>
+                    <TravelHistory touchableCount ={numKeys} navigation={navigation}/>
                 </ScrollView>
             </View>
         </SafeAreaView>

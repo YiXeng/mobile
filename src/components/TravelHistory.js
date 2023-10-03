@@ -2,6 +2,7 @@ import { StyleSheet,
     Text, 
     ImageBackground,
     SafeAreaView, 
+    Dimensions,
     TouchableOpacity,} from 'react-native';
 
 
@@ -76,7 +77,7 @@ const TravelHistory = ({ touchableCount }) => {
 const styles = StyleSheet.create({
     imageContainer:{
         height: 160,
-        width: 385,
+        width: (Dimensions.get('window').width - 50),
         marginVertical: 15,
         borderRadius: 10,
         overflow: 'hidden',

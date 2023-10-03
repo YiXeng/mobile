@@ -13,7 +13,7 @@ import DateTimeDisplay from '../components/DateTimeDisplay';
 
 const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get the navigation prop
     
-    const plan = 5;
+    const plan = 3;
     let content;
 
     if (jsonData != undefined){
@@ -32,12 +32,12 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
         <SafeAreaView style = {styles.background}>
 
 
-            <SafeAreaView style={{flexDirection: 'row', marginBottom: 10}}>
-                <Image source={require('../components/location_icon.png')}
+            <View style={{height: 35,flexDirection: 'row'}}>
+                <Image source={require('../../assets/location_icon.png')}
                 style={styles.locationIcon}/> 
                 <Text style = {styles.locationText}>Beijing</Text> 
                 <Text style = {styles.logOutText}>Log out</Text> 
-            </SafeAreaView>
+            </View>
             <ScrollView>
                 <DateTimeDisplay />
 
@@ -46,7 +46,7 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
 
 
                 <ImageBackground
-                source={require('../components/backgroundPic.png')}
+                source={require('../../assets/backgroundPic.png')}
                 style={styles.image}>
 
                     <Text style = {styles.placeText}>ON, CANAD</Text>
@@ -58,12 +58,12 @@ const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get t
                         }}
                     style={styles.buttonContainer}>
 
-                        <Text style = {styles.buttonText}>Get Started -</Text>
+                        <Text style = {styles.buttonText}>Get Started</Text>
                     </TouchableOpacity>
 
                 </ImageBackground>
 
-                <Image source={require('../components/time_icon.png')}
+                <Image source={require('../../assets/time_icon.png')}
                     style={styles.timeIcon}/> 
                     <Text style = {styles.travelText}>Travel History</Text> 
         
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     logOutText:{
         fontSize: 14,
         marginVertical: 5,
-        marginLeft: 220,
+        left: (Dimensions.get('window').width-170),
         fontWeight: 'bold',
 
     },
@@ -152,8 +152,7 @@ const styles = StyleSheet.create({
     locationIcon: {
         width: 28, 
         height: 28,
-        marginHorizontal: 30,
-        marginRight: 16,
+        marginHorizontal: 10,
     },
     timeIcon:{
         width: 35, 

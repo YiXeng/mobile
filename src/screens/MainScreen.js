@@ -17,6 +17,7 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
         try {
           const keys = await AsyncStorage.getAllKeys();
           const numberOfKeys = keys.length;
+          
           return numberOfKeys;
         } catch (error) {
           console.error("Error getting number of keys:", error);
@@ -28,13 +29,17 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
             const numberOfKeys = await getNumberOfKeys();
             setNumKeys(numberOfKeys);
         };
-
+        
         fetchNumberOfKeys();
+        
     }, []); 
 
     return (
+        
         <SafeAreaView style = {styles.background}>
+            {console.log("Output Screen, Key:", {numKeys})}
             <TouchableOpacity 
+                
                 onPress={() => {
                     console.log('User input Page');
                     navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop

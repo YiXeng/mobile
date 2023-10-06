@@ -12,7 +12,9 @@ import {
 
 const { width, height } = Dimensions.get("window");
 
-const UserInputScreen = ({ navigation }) => {
+
+const UserInputScreen = ({ route, navigation }) => {
+  const {key} = route.params;
   const [destination, setDestination] = useState("");
   const [budget, setBudget] = useState("");
   const [dates, setDates] = useState("");
@@ -46,7 +48,7 @@ const UserInputScreen = ({ navigation }) => {
     };
     console.log("userinputscreen", userInput);
 
-    navigation.navigate("example", { key: { userInput } });
+    navigation.navigate("example", { InputKey: { userInput } , StorageKey: key  } );
   };
 
   return (

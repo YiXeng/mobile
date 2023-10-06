@@ -37,7 +37,7 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
     return (
         
         <SafeAreaView style = {styles.background}>
-            {console.log("Output Screen, Key:", {numKeys})}
+            {console.log("MainScreen, Key:", {numKeys})}
             <TouchableOpacity 
                 
                 onPress={() => {
@@ -50,6 +50,7 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
             </TouchableOpacity>
 
             <View style={styles.historyContainer}>
+                {console.log("Output Screen")}
                 <Text style = {styles.historyText}>History</Text>
                 <ScrollView>
                     <TravelHistory touchableCount ={numKeys} navigation={navigation}/>

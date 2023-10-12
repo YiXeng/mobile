@@ -5,8 +5,7 @@ import { StyleSheet,
     Dimensions,
     TouchableOpacity,} from 'react-native';
 
-
-const TravelHistory = ({ touchableCount }) => {
+const TravelHistory = ({ touchableCount, navigation }) => {
 
   const getRandomDate = () => {
     // Generate a random month (0-11) and day (1-31)
@@ -28,9 +27,6 @@ const TravelHistory = ({ touchableCount }) => {
     // Display the formatted date
     return formattedDate;
   };
-
-
-
 
   const renderTouchable = () => {
 
@@ -64,6 +60,7 @@ const TravelHistory = ({ touchableCount }) => {
 
   const handleTouchablePress = (identifier) => {
     console.log(`Touchable ${identifier} pressed!`);
+    navigation.navigate("output", {key: identifier.toString()});
     // 执行你希望的Touchable点击事件处理逻辑
   };
 

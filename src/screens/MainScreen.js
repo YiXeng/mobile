@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { StyleSheet, 
     Text, 
     SafeAreaView, 
@@ -7,36 +8,65 @@ import { StyleSheet,
     ImageBackground,
     Dimensions,
     View,} from 'react-native'
-import Constants from 'expo-constants'
-import TravelHistory from '../components/TravelHistory'
+import Constants from 'expo-constants';
+import TravelHistory from '../components/TravelHistory';
 import DateTimeDisplay from '../components/DateTimeDisplay';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
-const MainScreen = ({ navigation , jsonData}) => { // Use destructuring to get the navigation prop
-    
-    const plan = 3;
-    let content;
 
-    if (jsonData != undefined){
-        content =(
-            <View>
-                <Text style = {styles.textSmall} >Please create a Travel Plan first</Text>
-            </View>
-        );
-    }else{
-        content =(
-                <TravelHistory touchableCount ={plan}/>
-        );
-    }
+const MainScreen = ({ navigation, jsonData }) => { // Use destructuring to get the navigation prop
+    const [numKeys, setNumKeys] = useState();
+
+    const getNumberOfKeys = async () => {
+        try {
+          const keys = await AsyncStorage.getAllKeys();
+          const numberOfKeys = keys.length;
+          
+          return numberOfKeys;
+        } catch (error) {
+          console.error("Error getting number of keys:", error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchNumberOfKeys = async () => {
+            const numberOfKeys = await getNumberOfKeys();
+            setNumKeys(numberOfKeys);
+        };
+        
+        fetchNumberOfKeys();
+        
+    }, []); 
 
     return (
+        
         <SafeAreaView style = {styles.background}>
+        {console.log("MainScreen, Key:", {numKeys})}
+        <TouchableOpacity 
+            onPress={() => {
+                console.log('User input Page');
+                navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
+            }}
+            style={styles.buttonContainer}
+        >
+            <Text style = {styles.buttonText}>Create a new Travel Plan</Text>
+        </TouchableOpacity>
 
+        <View style={styles.historyContainer}>
+            {console.log("Output Screen")}
+            <Text style = {styles.historyText}>History</Text>
+            <ScrollView>
+                <TravelHistory touchableCount ={numKeys} navigation={navigation}/>
+            </ScrollView>
+        </View>
 
-            <View style={{height: 35,flexDirection: 'row'}}>
-                <Image source={require('../../assets/location_icon.png')}
-                style={styles.locationIcon}/> 
-                <Text style = {styles.locationText}>Beijing</Text> 
-                <Text style = {styles.logOutText}>Log out</Text> 
+        <View style={{height: 35,flexDirection: 'row'}}>
+            <Image source={require('../../assets/location_icon.png')}
+            style={styles.locationIcon}/> 
+            <Text style = {styles.locationText}>Beijing</Text> 
+            <Text style = {styles.logOutText}>Log out</Text> 
+        </View>
+
             </View>
             <ScrollView>
                 <DateTimeDisplay />

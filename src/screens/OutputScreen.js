@@ -1,92 +1,150 @@
-import {
-  FlatList,
-  TouchableHighlight,
-  View,
-  Text,
-  useState,
-} from "react-native";
+import { FlatList, TouchableHighlight, View, Text, Pressable, NestableScrollContainer,Image  } from "react-native";
 import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
+import { useEffect, useState} from "react";
 
-//test
-const mockJsonData = {
-  Location: "Test Location",
-  Dates: {
-    "2023-07-10": {
-      description: "Day 1 Description",
-      Time: {
-        Hour1: {
-          time: "08:00",
-          temperature: "25°C",
-          weather: "Sunny",
-        },
-        Hour2: {
-          time: "09:00",
-          temperature: "27°C",
-          weather: "Sunny",
-        },
-        // add more hours if needed
-      },
-    },
-    "2023-07-11": {
-      description: "Day 2 Description",
-      Time: {
-        Hour1: {
-          time: "08:00",
-          temperature: "24°C",
-          weather: "Cloudy",
-        },
-        Hour2: {
-          time: "09:00",
-          temperature: "26°C",
-          weather: "Cloudy",
-        },
-        // add more hours if needed
-      },
-    },
-    // add more dates if needed
-  },
-};
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function OutputScreen({
-  jsonData = mockJsonData,
-  navigation,
-}) {
+import { ScrollView } from "react-native-gesture-handler";
 
+export default function OutputScreen({ route, navigation }) {
+  const { key } = route.params;
+  const [jsonData, setJsonData] = useState({});
+  const [datesData, setDatesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
+  useEffect(() => {
+    AsyncStorage.getItem(key)
+      .then((data) => {
+        const jData = JSON.parse(data);
+        const processedDatesData = Object.entries(jData.Dates).map(
+          ([day, data]) => {
+            return {
+              day,
+              ...data,
+            };
+          }
+        );
+        setJsonData(jData);
+        setDatesData(processedDatesData);
+        setIsDataFetched(true);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.getItem(key)
+      .then((data) => {
+        const jData = JSON.parse(data);
+        const processedDatesData = Object.entries(jData.Dates).map(
+          ([day, data]) => {
+            return {
+              day,
+              ...data,
+            };
+          }
+        );
+        setJsonData(jData);
+        setDatesData(processedDatesData);
+        setIsDataFetched(true); 
+        setIsLoading(false); 
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false); 
+      });
+  }, []);
+  
   function pressHandler() {
-    navigation.navigate('main');
+    navigation.navigate("main");
+
   }
 
-  const datesData = Object.entries(jsonData.Dates).map(([day, data]) => {
-    return {
-      day,
-      ...data,
-    };
-  });
+  if (isLoading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (!isDataFetched) {
+    return (
+      <View>
+        <Text>Error fetching data.</Text>
+      </View>
+    );
+  }
 
   return (
-    <View style={styles.wrapper}>
-      <Text style={styles.timeline}>Timeline</Text>
-      <Text style={styles.button}>Location: {jsonData.Location}</Text>
+    
 
-      <FlatList
+    <View style={styles.wrapper}>
+
+      {/* <Text style={styles.timeline}>Timeline</Text> */}
+
+      {console.log("Output Screen")}
+    <View style={styles.OutputTitle}>
+      <Image
+        source={require('../../assets/rec.png')}
+        style={{ width: 30, height: 30, paddingBottom: 5, paddingTop: 5, marginBottom: 10, marginTop: 18}}
+      />
+      <Text style={styles.timeline}>Travel Plan {jsonData.DatesSummary}</Text>
+      </View>
+      {/* <Text style={styles.timeline}>Travel</Text> */}
+
+      <Text style={styles.location}>{jsonData.Location}</Text>
+
+      
+      <ScrollView showsVerticalScrollIndicator={false}>
+
+      <View
+        style={styles.outputcomponent}
+      >
+        <Text style={styles.ComponentTitle}>Packing List</Text>
+      </View>
+      <View style={{padding: 10}}/>
+
+      <View
+        style={styles.outputcomponent}
+      >
+        <Text style={styles.ComponentTitle}>Navigation</Text>
+      </View>
+
+
+
+      <View style={{padding: 10}}/>
+
+
+
+      <View style={styles.outputcomponent}>
+        <Text style={styles.ComponentTitle}>Schedule</Text>
+        <FlatList
         data={datesData}
         renderItem={({ item }) => (
-          <View style={{ backgroundColor: "#edf2f4", padding: 3, margin: 10 }}>
-            <Text style={styles.day}>
-              {item.day} : {item.description}
+          <View style={{padding: 10 }}>
+            <Pressable
+            
+            onPress={() => {
+              navigation.navigate("day", { passedData: {day: item.day, description: item.IndividualDay, timeData: item.Time, key: key} })
+            }}
+            style={styles.day}>
+              <Text style={styles.IndividualText}>
+              {item.day} : {item.IndividualDay}
             </Text>
-            <OutputComponent
-              day={item.day}
-              description={item.description}
-              timeData={item.Time}
-            />
+            </Pressable>
+          
           </View>
         )}
-        style={styles.listContainer}
+        // style={styles.listContainer}
         keyExtractor={(item, index) => item.day}
       />
+      </View>
 
       <TouchableHighlight
         underlayColor="rgba(255, 255, 255, 0.1)"
@@ -94,6 +152,9 @@ export default function OutputScreen({
       >
         <Text style={styles.button}>Return to Main Screen</Text>
       </TouchableHighlight>
+
+      <View style={{padding: 50}}/>
+      </ScrollView>
     </View>
   );
 }

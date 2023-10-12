@@ -14,7 +14,7 @@ import DateTimeDisplay from '../components/DateTimeDisplay';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 
-const MainScreen = ({ navigation, jsonData }) => { // Use destructuring to get the navigation prop
+const MainScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
     const [numKeys, setNumKeys] = useState();
 
     const getNumberOfKeys = async () => {
@@ -39,76 +39,61 @@ const MainScreen = ({ navigation, jsonData }) => { // Use destructuring to get t
     }, []); 
 
     return (
-        
         <SafeAreaView style = {styles.background}>
-        {console.log("MainScreen, Key:", {numKeys})}
-        <TouchableOpacity 
-            onPress={() => {
-                console.log('User input Page');
-                navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
-            }}
-            style={styles.buttonContainer}
-        >
-            <Text style = {styles.buttonText}>Create a new Travel Plan</Text>
-        </TouchableOpacity>
-
-        <View style={styles.historyContainer}>
-            {console.log("Output Screen")}
-            <Text style = {styles.historyText}>History</Text>
-            <ScrollView>
-                <TravelHistory touchableCount ={numKeys} navigation={navigation}/>
-            </ScrollView>
-        </View>
-
-        <View style={{height: 35,flexDirection: 'row'}}>
-            <Image source={require('../../assets/location_icon.png')}
-            style={styles.locationIcon}/> 
-            <Text style = {styles.locationText}>Beijing</Text> 
-            <Text style = {styles.logOutText}>Log out</Text> 
-        </View>
-
+            {console.log("MainScreen, Key:", {numKeys})}
+            {/* <TouchableOpacity 
+                onPress={() => {
+                    console.log('User input Page');
+                    navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
+                }}
+                style={styles.buttonContainer}
+            >
+                <Text style = {styles.buttonText}>Create a new Travel Plan</Text>
+            </TouchableOpacity> */}
+    
+            <View style={{height: 35,flexDirection: 'row'}}>
+                <Image source={require('../../assets/location_icon.png')}
+                style={styles.locationIcon}/> 
+                <Text style = {styles.locationText}>Beijing</Text> 
+                <Text style = {styles.logOutText}>Log out</Text> 
             </View>
+    
             <ScrollView>
                 <DateTimeDisplay />
-
+    
                 <Text style = {styles.greetingText}> Hi David !</Text>
                 <Text style = {styles.greetingText}> Are you looking for a trip?</Text>
-
-
+    
                 <ImageBackground
                 source={require('../../assets/backgroundPic.png')}
                 style={styles.image}>
-
-                    <Text style = {styles.placeText}>ON, CANAD</Text>
+                    <Text style = {styles.placeText}>ON, CANADA</Text>
                     <Text style = {styles.spotText}>Riverdale Hills</Text>
                     <TouchableOpacity 
                     onPress={() => {
-                        console.log('User input Page');
-                        navigation.navigate('input'); // Call navigate on the navigation prop
+                            console.log('User input Page');
+                            navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
                         }}
                     style={styles.buttonContainer}>
-
                         <Text style = {styles.buttonText}>Get Started</Text>
                     </TouchableOpacity>
-
                 </ImageBackground>
-
+    
                 <Image source={require('../../assets/time_icon.png')}
                     style={styles.timeIcon}/> 
                     <Text style = {styles.travelText}>Travel History</Text> 
-        
-
+    
                 <View style={styles.historyContainer}>
-                    {content}
+                    {console.log("Output Screen")}
+                    <Text style = {styles.historyText}>History</Text>
+                    <ScrollView>
+                        <TravelHistory touchableCount ={numKeys} navigation={navigation}/>
+                    </ScrollView>
                 </View>
-
             </ScrollView>
-
-
         </SafeAreaView>
     );
 }
-
 // ... your style definitions and export statement
 
 

@@ -67,7 +67,7 @@ const ExampleScreen = ({ route, navigation }) => {
             {console.log("examplescreen",userInput)}
             {console.log("key:",key)}
             {/* {handleSubmit()} */}
-            <Text></Text>
+            {/* <Text></Text>
             <Text></Text>
             <Text></Text>
             <Text></Text>
@@ -75,7 +75,7 @@ const ExampleScreen = ({ route, navigation }) => {
             <Text></Text>
             <Text></Text>
             <Text>Data:</Text>
-            <Text>{data ? JSON.stringify(data, null, 2) : "No data available"}</Text>
+            <Text>{data ? JSON.stringify(data, null, 2) : "No data available"}</Text> */}
         </ScrollView>
     );
 };

@@ -7,6 +7,7 @@ export default function OutputComponent(props) {
   }));
 
   return (
+    <View>
     <FlatList
       data={hourArr}
       renderItem={({ item }) => (
@@ -18,5 +19,8 @@ export default function OutputComponent(props) {
       keyExtractor={(item, index) => Object.keys(item)[0]}
       style={{height: 400}}
     />
+    <View style={{padding: 30}}></View>
+    </View>
+
   );
 }

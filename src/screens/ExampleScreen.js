@@ -60,7 +60,19 @@ const ExampleScreen = ({ route, navigation }) => {
         </View>
     );
 
-    if (error) return console.error(error);
+    if (error) return (
+        <View>
+        {console.error(error)}
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text>{error}</Text>
+    </View>
+        
+    );
 
     return (
         <ScrollView style={{ padding: 10 }}>

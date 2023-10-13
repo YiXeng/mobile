@@ -4,7 +4,7 @@ const OpenAIApi = axios.create({
     baseURL: "https://api.openai.com/v1",
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+        'Authorization': `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`
     }
 });
 
@@ -14,6 +14,7 @@ export const getCompletion = async (prompt) => {
             prompt,
             max_tokens: 3500
         });
+
         return response.data.choices[0].text;
     } catch (error) {
         if (error.response) {

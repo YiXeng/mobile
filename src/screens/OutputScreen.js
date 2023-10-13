@@ -4,8 +4,10 @@ import { styles } from "../styles/Styles";
 import { useEffect, useState} from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { ScrollView } from "react-native-gesture-handler";
+
 
 export default function OutputScreen({ route, navigation }) {
   const { key } = route.params;
@@ -83,10 +85,8 @@ export default function OutputScreen({ route, navigation }) {
 
   return (
     
-
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <View style={styles.wrapper}>
-
-      {/* <Text style={styles.timeline}>Timeline</Text> */}
 
       {console.log("Output Screen")}
     <View style={styles.OutputTitle}>
@@ -156,5 +156,6 @@ export default function OutputScreen({ route, navigation }) {
       <View style={{padding: 50}}/>
       </ScrollView>
     </View>
+    </GestureHandlerRootView>
   );
 }

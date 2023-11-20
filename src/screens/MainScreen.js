@@ -100,6 +100,7 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
 const styles = StyleSheet.create({
     background:{
         marginTop: Constants.statusBarHeight,
+        flex: 0, 
     },
 
     //Contianers
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
     historyContainer:{
         marginHorizontal: 30,
         marginTop: 10,
+        
         justifyContent: 'center',
         alignItems: 'center',
     },

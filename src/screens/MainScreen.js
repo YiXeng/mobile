@@ -29,14 +29,16 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
         }
     };
 
-    useEffect(() => {
-        const fetchNumberOfKeys = async () => {
-            const numberOfKeys = await getNumberOfKeys();
-            setNumKeys(numberOfKeys);
-        };
+    useFocusEffect(
+        useCallback(() => {
+            const fetchNumberOfKeys = async () => {
+                const numberOfKeys = await getNumberOfKeys();
+                setNumKeys(numberOfKeys);
+            };
 
-        fetchNumberOfKeys();
-    }, []); 
+            fetchNumberOfKeys();
+        }, [])
+    );
 
     return (
         <SafeAreaView style = {styles.background}>

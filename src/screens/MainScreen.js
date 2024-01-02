@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet, 
     Text, 
     SafeAreaView, 
@@ -23,14 +24,17 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
         }
     };
 
-    useEffect(() => {
-        const fetchNumberOfKeys = async () => {
-            const numberOfKeys = await getNumberOfKeys();
-            setNumKeys(numberOfKeys);
-        };
+    useFocusEffect(
+        useCallback(() => {
+            const fetchNumberOfKeys = async () => {
+                const numberOfKeys = await getNumberOfKeys();
+                setNumKeys(numberOfKeys);
+            };
 
-        fetchNumberOfKeys();
-    }, []); 
+            fetchNumberOfKeys();
+        }, [])
+    );
+
 
     return (
         <SafeAreaView style = {styles.background}>

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useEffect } from 'react';
+import React, { useState  } from 'react';
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 import useCompletion from '../hooks/useCompletion';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ExampleScreen = ({ route, navigation }) => {
-    const key  = route.params.key1;
-    const asynckey = route.params.key2;
+    const key  = route.params.InputKey;
+    const asynckey = route.params.StorageKey;
     const [userInput, setUserInput] = useState(key)
     // const userInput = {
     //     destination: "Paris",
@@ -16,7 +17,17 @@ const ExampleScreen = ({ route, navigation }) => {
     //     additionalInfo: "Interested in local cuisines and art museums."
     //     // Add more fields as needed
     // };
-      
+    const { loading, error, data } = useCompletion(userInput);
+
+    useEffect(() => {
+        if (data) {
+            handleSaveData();
+            console.log(userInput);
+            setUserInput(key);
+            navigation.navigate("output", { key: asynckey });
+        }
+    }, [data]);
+
     const handleSaveData = async () => {
         try {
         const jsonValue = JSON.stringify(data);
@@ -29,12 +40,12 @@ const ExampleScreen = ({ route, navigation }) => {
 
     const handleSubmit = () => {
         handleSaveData();
-        // console.log(userInput);
-        // setUserInput(key);
+        console.log(userInput);
+        setUserInput(key);
         navigation.navigate("output", { key: asynckey });
     };
 
-    const { loading, error, data } = useCompletion(userInput);
+    
 
     if (loading) return (
         <View>
@@ -49,14 +60,26 @@ const ExampleScreen = ({ route, navigation }) => {
         </View>
     );
 
-    if (error) return console.error(error);
+    if (error) return (
+        <View>
+        {console.error(error)}
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Text>{error}</Text>
+    </View>
+        
+    );
 
     return (
         <ScrollView style={{ padding: 10 }}>
             {console.log("examplescreen",userInput)}
             {console.log("key:",key)}
-            {handleSubmit()}
-            <Text></Text>
+            {/* {handleSubmit()} */}
+            {/* <Text></Text>
             <Text></Text>
             <Text></Text>
             <Text></Text>
@@ -64,7 +87,7 @@ const ExampleScreen = ({ route, navigation }) => {
             <Text></Text>
             <Text></Text>
             <Text>Data:</Text>
-            <Text>{data ? JSON.stringify(data, null, 2) : "No data available"}</Text>
+            <Text>{data ? JSON.stringify(data, null, 2) : "No data available"}</Text> */}
         </ScrollView>
     );
 };

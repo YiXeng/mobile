@@ -32,47 +32,51 @@ const useCompletion = ({userInput}) => {
     const prompt = `Plan a travel itinerary for ${userInput.lengthOfTour} 
                     days to ${userInput.destination}. The budget is ${userInput.budget} 
                     and the dates are ${userInput.dates}. The travel focus is ${userInput.preferences}. 
-                    ${userInput.additionalInfo || ''} Please return the response in JSON-compatible format. 
-                    Make sure to enclose all keys in double quotes. Follow the following example, but please fulfill in your
-                    informations in each place holder like time, activityname, description... Do not leave them blank. Please make sure that 
+                    ${userInput.additionalInfo || ''} If any of the above information is missing such as an obvious word in a sentence, 
+                    you can fill in the word randomly to ensure the completeness as well as the accuracy of the answer. 
+                    Please only return the response in JSON-compatible format. 
+                    Make sure to enclose all keys in double quotes. Follow the exact format of the following example, but please fulfill in your
+                    informations in each place holder like time, activityname, description... 
+                    Do not leave them blank. Please make sure that 
                     the hours has been spread out in the full day and you can add more hours if needed: 
                     {
-                        "Location": "Test Location",
-                        "DatesSummary": "July 10-14",
-                        "Dates": {
-                          "2023-07-10": {
-                            "IndividualDay": "Day 1",
-                            "Time": {
-                              "Hour1": {
-                                "time": "08:00",
-                                "ActivityName": "meal/tourist attraction",
-                                "description": ""
-                              },
-                              "Hour2": {
-                                "time": "09:00",
-                                "ActivityName": "meal/tourist attraction",
-                                "description": ""
-                              },
-                              "Hour3": {
-                                "time": "10:00",
-                                "ActivityName": "meal/tourist attraction",
-                                "description": ""
-                            
-                              }
+                      "Location": "Test Location",
+                      "DatesSummary": "July 10-14",
+                      "Dates": {
+                        "2023-07-10": {
+                          "IndividualDay": "Day 1",
+                          "Time": {
+                            "Hour1": {
+                              "time": "08:00",
+                              "ActivityName": "meal/tourist attraction",
+                              "description": ""
+                            },
+                            "Hour2": {
+                              "time": "09:00",
+                              "ActivityName": "meal/tourist attraction",
+                              "description": ""
+                            },
+                            "Hour3": {
+                              "time": "10:00",
+                              "ActivityName": "meal/tourist attraction",
+                              "description": ""
+                          
                             }
-                          },
-                          "2023-07-11": {
-                            "IndividualDay": "Day 2",
-                            "Time": {
-                              "Hour1": {
-                                "time": "08:00",
-                                "ActivityName": "meal/tourist attraction",
-                                "description": ""
-                              }
+                          }
+                        },
+                        "2023-07-11": {
+                          "IndividualDay": "Day 2",
+                          "Time": {
+                            "Hour1": {
+                              "time": "08:00",
+                              "ActivityName": "meal/tourist attraction",
+                              "description": ""
                             }
                           }
                         }
-                      }`;
+                      }
+                    }
+                    `;
 
 
     useEffect(() => {

@@ -42,6 +42,24 @@ const useCompletion = ({userInput}) => {
                     {
                       "Location": "Test Location",
                       "DatesSummary": "July 10-14",
+                      "Packing List" : {
+                          "Documents" : {
+                              "1":"item1",
+                              "2":"item2"
+                          },
+                          "Clothing": {
+
+                          },
+                          "Toiletries": {
+
+                          },
+                          "Electronics":{
+
+                          },
+                          "Miscellaneous":{
+
+                          }
+                      }
                       "Dates": {
                         "2023-07-10": {
                           "IndividualDay": "Day 1",

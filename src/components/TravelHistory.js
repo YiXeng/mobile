@@ -35,8 +35,6 @@ const TravelHistory = ({ touchableCount, navigation }) => {
     for (let i = 0; i < touchableCount; i++) {
       image = 'https://picsum.photos/200/300'
       touchableOpacityArray.push(
-
-
         <TouchableOpacity 
         key={i} 
         onPress={() => handleTouchablePress(i+1)}
@@ -50,8 +48,6 @@ const TravelHistory = ({ touchableCount, navigation }) => {
           </ImageBackground>
 
         </TouchableOpacity>
-        
-
 
       );
     }

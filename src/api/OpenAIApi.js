@@ -1,8 +1,4 @@
 import axios from 'axios';
-import Constants from 'expo-constants';
-
-const EXPO_PUBLIC_OPENAI_API_KEY = Constants.expoConfig.extra.mySecret;
-
 
 const OpenAIApi = axios.create({
     baseURL: "https://api.openai.com/v1",
@@ -38,7 +34,7 @@ export const getCompletion = async (prompt) => {
         }
         console.log(error.config);
     }
-    
+
 };
 
 export default OpenAIApi;

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "YiXing1",
+    "name": "YiXing",
     "slug": "YiXing1",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.leoyin.YiXing1",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,8 +28,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "env": {
-      "OPENAI_API_KEY": "OPENAI_API_KEY"
+    "extra": {
+      "eas": {
+        "projectId": "126f60db-c41e-4029-8306-df1a754f6ded"
+      }
     }
   }
 }

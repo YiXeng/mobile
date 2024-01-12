@@ -1,24 +1,20 @@
 import axios from 'axios';
-import Constants from 'expo-constants';
-
-const EXPO_PUBLIC_OPENAI_API_KEY = Constants.expoConfig.extra.mySecret;
 
 
 const OpenAIApi = axios.create({
     baseURL: "https://api.openai.com/v1",
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${EXPO_PUBLIC_OPENAI_API_KEY}`
+        'Authorization': `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`
     }
 });
 
 export const getCompletion = async (prompt) => {
     try {
-        const response = await OpenAIApi.post('/engines/text-davinci-003/completions', {
+        const response = await OpenAIApi.post('/engines/gpt-3.5-turbo-instruct/completions', {
             prompt,
             max_tokens: 3500
         });
-        console.log("api:", EXPO_PUBLIC_OPENAI_API_KEY);
         return response.data.choices[0].text;
     } catch (error) {
         if (error.response) {
@@ -38,7 +34,7 @@ export const getCompletion = async (prompt) => {
         }
         console.log(error.config);
     }
-    
+
 };
 
 export default OpenAIApi;

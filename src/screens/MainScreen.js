@@ -100,19 +100,21 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
 const styles = StyleSheet.create({
     background:{
         marginTop: Constants.statusBarHeight,
+        // 確保沒有額外的邊距或內邊距
     },
 
-    //Contianers
+    // Containers
     buttonContainer: {
         height: 35,
         width: 100,
         marginHorizontal: (Dimensions.get('window').width - 170),
-        marginTop: -20,
+        marginTop: -20, // 檢查是否有必要的負邊距
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 16,
     },
+    
     historyContainer:{
         marginHorizontal: 30,
         marginTop: 10,
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
-    //texts
+    // Texts
     buttonText:{
         fontWeight: 'bold',
         fontSize: 12,
@@ -135,7 +137,6 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         left: (Dimensions.get('window').width-170),
         fontWeight: 'bold',
-
     },
     greetingText:{
         fontSize: 26,
@@ -148,7 +149,6 @@ const styles = StyleSheet.create({
         color: 'white',
         marginTop: 190,
         marginLeft: 20,
-        
     },
     spotText:{
         fontSize: 24,
@@ -159,11 +159,11 @@ const styles = StyleSheet.create({
     travelText:{
         fontSize: 26,
         marginLeft: 90,
-        marginTop: -35,
+        marginTop: -35, // 負的邊距可能會導致布局問題
         fontWeight: 'bold'
     },
 
-    //images
+    // Images
     locationIcon: {
         width: 28, 
         height: 28,
@@ -173,20 +173,18 @@ const styles = StyleSheet.create({
         width: 35, 
         height: 35,
         marginHorizontal: 30,
-
     },
     image: {
         borderRadius: 10,
-        width: 385,
-        height: 270,
         width: (Dimensions.get('window').width - 50),
+        height: 270, // 確保高度適當
         marginVertical: 30,
         marginHorizontal: 22,
         overflow: 'hidden',
-
     },
-    
 });
+
+
 
 export default MainScreen;
 

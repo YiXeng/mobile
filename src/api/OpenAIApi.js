@@ -11,11 +11,15 @@ const OpenAIApi = axios.create({
 
 export const getCompletion = async (prompt) => {
     try {
-        const response = await OpenAIApi.post('/engines/gpt-3.5-turbo-instruct/completions', {
-            prompt,
-            max_tokens: 3500
+        const response = await OpenAIApi.post('/chat/completions', { // Assuming this is the correct endpoint
+            model: 'gpt-3.5-turbo-1106', // or another model that supports JSON mode
+            response_format: { "type": "json_object" },
+            messages: [
+                { "role": "system", "content": "You are a helpful travel planner designed to output JSON that generate a personalized travel itinerary based on user inputs." },
+                { "role": "user", "content": prompt }
+            ]
         });
-        return response.data.choices[0].text;
+        return response.data.choices[0].message.content;
     } catch (error) {
         if (error.response) {
             // The request was made and the server responded with a status code

@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { ScrollView } from "react-native-gesture-handler";
+import PackingList from "../components/PackingList";
 
 
 export default function OutputScreen({ route, navigation }) {
@@ -15,29 +16,6 @@ export default function OutputScreen({ route, navigation }) {
   const [datesData, setDatesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDataFetched, setIsDataFetched] = useState(false);
-
-  useEffect(() => {
-    AsyncStorage.getItem(key)
-      .then((data) => {
-        const jData = JSON.parse(data);
-        const processedDatesData = Object.entries(jData.Dates).map(
-          ([day, data]) => {
-            return {
-              day,
-              ...data,
-            };
-          }
-        );
-        setJsonData(jData);
-        setDatesData(processedDatesData);
-        setIsDataFetched(true);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setIsLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     AsyncStorage.getItem(key)
@@ -106,11 +84,11 @@ export default function OutputScreen({ route, navigation }) {
       <View
         style={styles.outputcomponent}
       >
-        <Text style={styles.ComponentTitle}>Packing List</Text>
+        <PackingList json={jsonData.PackingList}/>
       </View>
       <View style={{padding: 10}}/>
 
-      <View
+      <View 
         style={styles.outputcomponent}
       >
         <Text style={styles.ComponentTitle}>Navigation</Text>

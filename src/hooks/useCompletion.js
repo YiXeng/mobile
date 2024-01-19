@@ -42,7 +42,7 @@ const useCompletion = ({ userInput }) => {
                     {
                       "Location": "Test Location",
                       "DatesSummary": "July 10-14",
-                      "Packing_List" : {
+                      "PackingList" : {
                           "Documents" : {
                               "1":"item1",
                               "2":"item2"

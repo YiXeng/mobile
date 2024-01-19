@@ -31,6 +31,7 @@ const ExampleScreen = ({ route, navigation }) => {
     const handleSaveData = async () => {
         try {
         const jsonValue = JSON.stringify(data);
+        console.log(jsonValue)
         await AsyncStorage.setItem(asynckey, jsonValue);
         console.log("in handle save data.");
         } catch (error) {

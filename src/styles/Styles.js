@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
     textAlign: "center",
-    height: 250,
+    height: 300,
 
   },
   button: {

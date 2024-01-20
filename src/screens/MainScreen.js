@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { getLocation, getAddressFromCoordinates } from './LocationService'; // Adjust the path as necessary
 import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet,
    Text,
@@ -18,95 +19,97 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const MainScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
-   const [numKeys, setNumKeys] = useState();
 
+    console.log("1");
+   const [numKeys, setNumKeys] = useState();
 
    const [location, setLocation] = useState(null);
    const [address, setAddress] = useState('Fetching location...');
 
 
    useEffect(() => {
-       const fetchLocationAndAddress = async () => {
-           const currentLocation = await getLocation();
-           setLocation(currentLocation);
-           if (currentLocation) {
-               const addressResult = await getAddressFromCoordinates(
-                   currentLocation.coords.latitude,
-                   currentLocation.coords.longitude,
-               );
-               if (addressResult) {
-                   // Constructing a simple address line (you can format it as you like)
-                   setAddress(`${addressResult.city}, ${addressResult.region}, ${addressResult.country}`);
-               }
-           }
-       };
+    const fetchLocationAndAddress = async () => {
+        const currentLocation = await getLocation();
+        setLocation(currentLocation);
+        if (currentLocation) {
+            const addressResult = await getAddressFromCoordinates(
+                currentLocation.coords.latitude,
+                currentLocation.coords.longitude,
+            );
+            if (addressResult) {
+                // Constructing a simple address line (you can format it as you like)
+                setAddress(`${addressResult.city}, ${addressResult.region}, ${addressResult.country}`);
+            }
+        }
+    };
+
+    fetchLocationAndAddress();
+    }, []);
 
 
-       fetchLocationAndAddress();
-   }, []);
 
 
-   const getNumberOfKeys = async () => {
-       try {
-         const keys = await AsyncStorage.getAllKeys();
-         const numberOfKeys = keys.length;
+    const getNumberOfKeys = async () => {
+        try {
+            const keys = await AsyncStorage.getAllKeys();
+            const numberOfKeys = keys.length;
         
-         return numberOfKeys;
+            return numberOfKeys;
        } catch (error) {
-         console.error("Error getting number of keys:", error);
+            console.error("Error getting number of keys:", error);
        }
-   };
+    };
 
 
-   useFocusEffect(
-       useCallback(() => {
-           const fetchNumberOfKeys = async () => {
-               const numberOfKeys = await getNumberOfKeys();
-               setNumKeys(numberOfKeys);
-           };
+    useFocusEffect(
+        useCallback(() => {
+            const fetchNumberOfKeys = async () => {
+                const numberOfKeys = await getNumberOfKeys();
+                setNumKeys(numberOfKeys);
+            };
 
 
-           fetchNumberOfKeys();
-       }, [])
+            fetchNumberOfKeys();
+        }, [])
    );
 
 
-   return (
-       <SafeAreaView style = {styles.background}>
-           {console.log("MainScreen, Key:", {numKeys})}
-           {/* <TouchableOpacity
-               onPress={() => {
+    return (
+        <SafeAreaView style = {styles.background}>
+            {console.log("MainScreen, Key:", {numKeys})}
+            {/* <TouchableOpacity
+                onPress={() => {
                    console.log('User input Page');
                    navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
                }}
                style={styles.buttonContainer}
            >
                <Text style = {styles.buttonText}>Create a new Travel Plan</Text>
-           </TouchableOpacity> */}
+            </TouchableOpacity> */}
   
-           <View style={{height: 35,flexDirection: 'row'}}>
-               <Image source={require('../../assets/location_icon.png')}
-               style={styles.locationIcon}/>
-               <Text style = {styles.locationText}>{address}</Text>
-               <Text style = {styles.logOutText}>Log out</Text>
-           </View>
+            <View style={{height: 35,flexDirection: 'row'}}>
+                <Image source={require('../../assets/location_icon.png')}
+                style={styles.locationIcon}/>
+                <Text style = {styles.locationText}>{address}</Text>
+                <Text style = {styles.logOutText}>Log out</Text>
+            </View>
   
-           <ScrollView>
-               <DateTimeDisplay />
+            <ScrollView>
+                <DateTimeDisplay />
   
-               <Text style = {styles.greetingText}> Hi David !</Text>
-               <Text style = {styles.greetingText}> Are you looking for a trip?</Text>
+                <Text style = {styles.greetingText}> Hi David !</Text>
+                <Text style = {styles.greetingText}> Are you looking for a trip?</Text>
   
-               <ImageBackground
-               source={require('../../assets/backgroundPic.png')}
-               style={styles.image}>
-                   <Text style = {styles.placeText}>ON, CANADA</Text>
-                   <Text style = {styles.spotText}>Riverdale Hills</Text>
-                   <TouchableOpacity
-                   onPress={() => {
-                           console.log('User input Page');
-                           navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
-                       }}
+                <ImageBackground
+                source={require('../../assets/backgroundPic.png')}
+                style={styles.image}>
+                    <Text style = {styles.placeText}>ON, CANADA</Text>
+                    <Text style = {styles.spotText}>Riverdale Hills</Text>
+                    <TouchableOpacity
+                    onPress={() => {
+                            console.log('User input Page');
+                            navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
+                            }}
                    style={styles.buttonContainer}>
                        <Text style = {styles.buttonText}>Get Started</Text>
                    </TouchableOpacity>

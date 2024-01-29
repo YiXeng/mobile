@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-const MainScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
+const TravelHistoryScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
    const [numKeys, setNumKeys] = useState();
 
 
@@ -92,25 +92,17 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
            </View>
   
            <ScrollView>
-               <DateTimeDisplay />
+               <Image source={require('../../assets/time_icon.png')}
+                   style={styles.timeIcon}/>
+                   <Text style = {styles.travelText}>Travel History</Text>
   
-               <Text style = {styles.greetingText}> Hi David !</Text>
-               <Text style = {styles.greetingText}> Are you looking for a trip?</Text>
-  
-               <ImageBackground
-               source={require('../../assets/backgroundPic.png')}
-               style={styles.image}>
-                   <Text style = {styles.placeText}>ON, CANADA</Text>
-                   <Text style = {styles.spotText}>Riverdale Hills</Text>
-                   <TouchableOpacity
-                   onPress={() => {
-                           console.log('User input Page');
-                           navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
-                       }}
-                   style={styles.buttonContainer}>
-                       <Text style = {styles.buttonText}>Get Started</Text>
-                   </TouchableOpacity>
-               </ImageBackground>
+               <View style={styles.historyContainer}>
+                   {console.log("Output Screen")}
+                   <Text style = {styles.historyText}>History</Text>
+                   <ScrollView>
+                       <TravelHistory touchableCount ={numKeys} navigation={navigation}/>
+                   </ScrollView>
+               </View>
            </ScrollView>
        </SafeAreaView>
    );
@@ -225,11 +217,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default MainScreen;
-
-
-
-
-
-
-
+export default TravelHistoryScreen;

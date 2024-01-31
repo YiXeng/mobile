@@ -1,10 +1,13 @@
 import OutputComponent from "../components/OutputComponent";
 import { Pressable, View, Text, Dimensions, StyleSheet} from "react-native";
 import { styles } from "../styles/Styles";
+import MapViewComponent from "./MapViewComponent";
 
 
 const DayScreen = ({ route, navigation }) => {
   const { passedData } = route.params;
+  const { day, description, timeData, placeNames } = passedData;
+
   const onPressReturn = () => {
     navigation.navigate("output", { key: passedData.key });
   };
@@ -30,18 +33,28 @@ const DayScreen = ({ route, navigation }) => {
 
   return (
     <View>
-      <View style={{ padding: 20 }} />
-      <Pressable onPress={onPressReturn}>
+      {/* Return Button */}
+      <Pressable onPress={onPressReturn} style={styles.returnButton}>
         <Text style={styles.dayComponentReturn}> &lt; return </Text>
       </Pressable>
-      <View style={{ padding: 150 }} />
-      <Text style={styles.timeline}>{passedData.description}</Text>
-      <Text style={styles.dayTime}>{formatDate(passedData.day)}</Text>
+
+      {/* Day Information */}
+      <Text style={styles.timeline}>{description}</Text>
+      <Text style={styles.dayTime}>{formatDate(day)}</Text>
+
+      {/* OutputComponent */}
       <OutputComponent
-        day={passedData.day}
-        description={passedData.description}
-        timeData={passedData.timeData}
+        day={day}
+        description={description}
+        timeData={timeData}
       />
+
+        {/* Conditional rendering of MapViewComponent */}
+        {placeNames && placeNames.length > 0 && (
+        <MapViewComponent 
+        style={{ container: styles.mapContainer, map: styles.map }} placeNames={placeNames} />
+      )}
+
 
     </View>
   );

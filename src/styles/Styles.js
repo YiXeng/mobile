@@ -134,5 +134,17 @@ export const styles = StyleSheet.create({
     // width: "90%",
     fontSize: 20,
     fontWeight: "bold",
-  }
+  },
+
+
+  mapContainer: {
+    height: '80%' ,  // or any other height
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
 });

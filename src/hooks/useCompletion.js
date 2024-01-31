@@ -66,19 +66,21 @@ const useCompletion = ({ userInput }) => {
                           "Time": {
                             "Hour1": {
                               "time": "08:00",
-                              "ActivityName": "meal/tourist attraction",
+                              "ActivityName": "eating beijing roasted duck / the great wall",
+                              "Type": "meal/TA/other" (the final value of type should be one of these three)
                               "description": ""
                             },
                             "Hour2": {
                               "time": "09:00",
-                              "ActivityName": "meal/tourist attraction",
+                              "ActivityName": "check-in in hotel / commute to the great wall",
+                              "Type": "meal/TA/other" (the final value of type should be one of these three)
                               "description": ""
                             },
                             "Hour3": {
                               "time": "10:00",
-                              "ActivityName": "meal/tourist attraction",
+                              "ActivityName": "check-out in hotel / go to airport and fly back",
+                              "Type": "meal/TA/other" (the final value of type should be one of these three)
                               "description": ""
-                          
                             }
                           }
                         },
@@ -88,6 +90,7 @@ const useCompletion = ({ userInput }) => {
                             "Hour1": {
                               "time": "08:00",
                               "ActivityName": "meal/tourist attraction",
+                              "Type": "meal/TA/other" (the final value of type should be one of these three)
                               "description": ""
                             }
                           }

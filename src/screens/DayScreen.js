@@ -42,6 +42,13 @@ const DayScreen = ({ route, navigation }) => {
       <Text style={styles.timeline}>{description}</Text>
       <Text style={styles.dayTime}>{formatDate(day)}</Text>
 
+      <View style={styles.outputcomponent}>
+        {placeNames && placeNames.length > 0 && (
+        <MapViewComponent 
+        style={{ container: styles.mapContainer, map: styles.map }} placeNames={placeNames} />
+      )}
+      </View> 
+
       {/* OutputComponent */}
       <OutputComponent
         day={day}
@@ -49,11 +56,12 @@ const DayScreen = ({ route, navigation }) => {
         timeData={timeData}
       />
 
+
         {/* Conditional rendering of MapViewComponent */}
-        {placeNames && placeNames.length > 0 && (
-        <MapViewComponent 
-        style={{ container: styles.mapContainer, map: styles.map }} placeNames={placeNames} />
-      )}
+        
+
+      
+
 
 
     </View>

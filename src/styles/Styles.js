@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
     height: 300,
 
   },
+
   button: {
     color: "black",
     paddingHorizontal: 10,
@@ -121,6 +122,7 @@ export const styles = StyleSheet.create({
     fontSize:20,
     color: "black",
     padding: 5,
+    marginTop: 50,
     margin: 10,
     fontWeight: "bold",
   },
@@ -143,6 +145,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   map: {
     ...StyleSheet.absoluteFillObject,
   },

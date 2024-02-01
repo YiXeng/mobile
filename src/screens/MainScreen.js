@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { getLocation, getAddressFromCoordinates } from './LocationService'; // Adjust the path as necessary
+import { getLocation, getAddressFromCoordinates } from '/Users/guanyulu/Documents/GitHub/mobile/src/screens/LocationService.js'; // Adjust the path as necessary
 import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet,
    Text,

@@ -7,6 +7,7 @@ import ExampleScreen from "./src/screens/ExampleScreen";
 import OutputScreen from "./src/screens/OutputScreen";
 import UserInputScreen from "./src/screens/UserInputScreen";
 import DayScreen from "./src/screens/DayScreen";
+import SignInScreen from "./src/screens/SignInScreen";
 
 import { Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -43,7 +44,7 @@ function Home() {
         headerShown: false,
       }}>
 
-        <Tab.Screen
+      <Tab.Screen
         name="main"
         component={MainScreen}
         options={{
@@ -73,20 +74,20 @@ function Home() {
           ),
         }}
       />
-      </Tab.Navigator>
+    </Tab.Navigator>
   );
 }
-
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Signin"
         screenOptions={{
           headerShown: false,
         }}
       >
+        <Stack.Screen name="Signin" component={SignInScreen} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="main" component={MainScreen} />
         <Stack.Screen name="example" component={ExampleScreen} />
@@ -95,4 +96,5 @@ export default function App() {
         <Stack.Screen name="day" component={DayScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-  );}
+  );
+}

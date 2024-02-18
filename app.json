@@ -15,19 +15,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.YiXing1"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.YiXing1"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "env": {
       "OPENAI_API_KEY": "OPENAI_API_KEY"
-    }
+    },
+    "scheme": "YiXing1",
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ]
   }
 }

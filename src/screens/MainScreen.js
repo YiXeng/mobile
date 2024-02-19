@@ -15,6 +15,7 @@ import Constants from 'expo-constants';
 import TravelHistory from '../components/TravelHistory';
 import DateTimeDisplay from '../components/DateTimeDisplay';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
 
@@ -90,7 +91,17 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
                 <Image source={require('../../assets/location_icon.png')}
                     style={styles.locationIcon} />
                 <Text style={styles.locationText}>{address}</Text>
-                <Text>Log out</Text>
+                <TouchableOpacity onPress={async () => {
+                    try {
+                        await GoogleSignin.signOut();
+                        //setState({ user: null }); // Remember to remove the user from your app's state as well
+                    } catch (error) {
+                        console.error(error);
+                    }
+                    navigation.navigate("Signin")
+                }}>
+                    <Text style={styles.logOutText}>Log out</Text>
+                </TouchableOpacity>
             </View>
 
             <ScrollView>

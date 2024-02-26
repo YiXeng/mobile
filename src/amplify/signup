@@ -1,0 +1,17 @@
+import { Auth } from 'aws-amplify';
+
+async function signUp(username, password, phonenumber) {
+    try {
+        const { user } = await Auth.signUp({
+            username,
+            password,
+            attributes: {
+                phonenumber, // 可选
+                // 其他属性...
+            }
+        });
+        console.log(user);
+    } catch (error) {
+        console.log('error signing up:', error);
+    }
+}

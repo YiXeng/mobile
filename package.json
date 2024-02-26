@@ -23,6 +23,7 @@
     "constant": "^1.0.2",
     "expo": "^49.0.21",
     "expo-constants": "~14.4.2",
+    "expo-location": "^16.5.3",
     "expo-status-bar": "~1.6.0",
     "langchain": "^0.0.120",
     "openai": "^4.24.3",

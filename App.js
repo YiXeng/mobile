@@ -8,15 +8,10 @@ import OutputScreen from "./src/screens/OutputScreen";
 import UserInputScreen from "./src/screens/UserInputScreen";
 import DayScreen from "./src/screens/DayScreen";
 
-import Amplify from 'aws-amplify';
-import awsConfig from './aws-exports';
-
 import { Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-Amplify.configure(awsConfig);
 
 const Tab = createBottomTabNavigator();
 

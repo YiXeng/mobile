@@ -1,9 +1,7 @@
 import * as SQLite from "expo-sqlite";
 
-// Open the database; the database is created if it doesn't exist yet.
 const db = SQLite.openDatabase("History.db");
 
-// Function to create the Users table if it doesn't exist
 const createTable = () => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -15,7 +13,6 @@ const createTable = () => {
   });
 };
 
-// Function to insert a new user into the Users table
 const insertJsonData = (jsonData) => {
   const jsonString = JSON.stringify(jsonData);
 
@@ -34,7 +31,7 @@ const insertJsonData = (jsonData) => {
 const deleteAllHistoryData = () => {
   db.transaction((tx) => {
     tx.executeSql(
-      "DELETE FROM HistoryData;", // Update the table name to UserData
+      "DELETE FROM HistoryData;",
       [],
       () => console.log("All data deleted successfully"),
       (_, error) => console.log("Error deleting data:", error)
@@ -79,17 +76,15 @@ const fetchAllHistoryData = () => {
       tx.executeSql(
         "SELECT * FROM HistoryData;",
         [],
-        (_, { rows }) => resolve(rows._array), // Resolve the promise with the array of history data entries
-        (_, error) => reject(error) // Reject the promise if there's an error
+        (_, { rows }) => resolve(rows._array), 
+        (_, error) => reject(error)
       );
     });
   });
 };
 
-// Immediately try to create the table upon module initialization
 createTable();
 
-// Export the database and functions for external use
 export {
   db,
   insertJsonData,

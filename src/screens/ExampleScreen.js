@@ -6,7 +6,6 @@ import { insertJsonData } from '../db/db';
 
 const ExampleScreen = ({ route, navigation }) => {
     const key  = route.params.InputKey;
-    const [asynckey, setAsynckey] = useState();
     const [userInput, setUserInput] = useState(key)
     const { loading, error, data } = useCompletion(userInput);
 
@@ -20,7 +19,6 @@ const ExampleScreen = ({ route, navigation }) => {
                     navigation.navigate("output", { key: userId });
                 }
             });
-            
         }
     }, [data]);
 
@@ -69,16 +67,6 @@ const ExampleScreen = ({ route, navigation }) => {
         <ScrollView style={{ padding: 10 }}>
             {console.log("examplescreen",userInput)}
             {console.log("key:",key)}
-            {/* {handleSubmit()} */}
-            {/* <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text></Text>
-            <Text>Data:</Text>
-            <Text>{data ? JSON.stringify(data, null, 2) : "No data available"}</Text> */}
         </ScrollView>
     );
 };

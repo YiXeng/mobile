@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import {
     StyleSheet,
     Text,
@@ -14,23 +14,19 @@ import {
 import Constants from 'expo-constants';
 import TravelHistory from '../components/TravelHistory';
 import DateTimeDisplay from '../components/DateTimeDisplay';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAddressFromCoordinates, getLocation } from './LocationService';
 
+import { fetchAllHistoryData } from '../db/db';
 
-
-const MainScreen = ({ navigation }) => { // Use destructuring to get the navigation prop
+const MainScreen = ({ navigation }) => {
     const [numKeys, setNumKeys] = useState();
-
-
-    const [location, setLocation] = useState(null);
     const [address, setAddress] = useState('Fetching location...');
 
 
     useEffect(() => {
+
         const fetchLocationAndAddress = async () => {
             const currentLocation = await getLocation();
-            setLocation(currentLocation);
             if (currentLocation) {
                 const addressResult = await getAddressFromCoordinates(
                     currentLocation.coords.latitude,
@@ -42,50 +38,33 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
                 }
             }
         };
-
-
         fetchLocationAndAddress();
+        getNumberOfKeys();
+
+        // Debug Purposes
+        fetchAllHistoryData().then(historyData => {
+            console.log('All history data:', historyData);
+          }).catch(error => {
+            console.error('Failed to fetch history data:', error);
+          });
+        
     }, []);
 
 
     const getNumberOfKeys = async () => {
         try {
-            const keys = await AsyncStorage.getAllKeys();
-            const numberOfKeys = keys.length;
-
-            return numberOfKeys;
+            const usersArray = await fetchAllHistoryData();
+            console.log(usersArray);
+            console.log(usersArray.length)
+            setNumKeys(usersArray.length)
         } catch (error) {
-            console.error("Error getting number of keys:", error);
+            console.error("Error fetching users:", error);
         }
     };
-
-
-    useFocusEffect(
-        useCallback(() => {
-            const fetchNumberOfKeys = async () => {
-                const numberOfKeys = await getNumberOfKeys();
-                setNumKeys(numberOfKeys);
-            };
-
-
-            fetchNumberOfKeys();
-        }, [])
-    );
-
-
+    
     return (
         <SafeAreaView style={styles.background}>
-            {console.log("MainScreen, Key:", { numKeys })}
-            {/* <TouchableOpacity
-               onPress={() => {
-                   console.log('User input Page');
-                   navigation.navigate('input',  { key: (numKeys+1).toString() }); // Call navigate on the navigation prop
-               }}
-               style={styles.buttonContainer}
-           >
-               <Text style = {styles.buttonText}>Create a new Travel Plan</Text>
-           </TouchableOpacity> */}
-
+            {console.log("Main Screen")}
             <View style={{ height: 35, flexDirection: 'row' }}>
                 <Image source={require('../../assets/location_icon.png')}
                     style={styles.locationIcon} />
@@ -119,7 +98,6 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
                 <Text style={styles.travelText}>Travel History</Text>
 
                 <View style={styles.historyContainer}>
-                    {console.log("Output Screen")}
                     <Text style={styles.historyText}>History</Text>
                     <ScrollView>
                         <TravelHistory touchableCount={numKeys} navigation={navigation} />
@@ -129,8 +107,6 @@ const MainScreen = ({ navigation }) => { // Use destructuring to get the navigat
         </SafeAreaView>
     );
 }
-// ... your style definitions and export statement
-
 
 
 
@@ -139,14 +115,6 @@ const styles = StyleSheet.create({
         marginTop: Constants.statusBarHeight,
         flex: 0,
     },
-
-
-    //navigation
-
-
-
-
-    //Contianers
     buttonContainer: {
         height: 35,
         width: 100,
@@ -164,8 +132,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-
     //texts
     buttonText: {
         fontWeight: 'bold',
@@ -181,8 +147,6 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         left: (Dimensions.get('window').width - 250),
         fontWeight: 'bold',
-
-
     },
     greetingText: {
         fontSize: 26,

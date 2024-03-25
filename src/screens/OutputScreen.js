@@ -3,11 +3,11 @@ import OutputComponent from "../components/OutputComponent";
 import { styles } from "../styles/Styles";
 import { useEffect, useState} from "react";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { ScrollView } from "react-native-gesture-handler";
 import PackingList from "../components/PackingList";
+import {fetchJsonData} from "../db/db";
 
 
 export default function OutputScreen({ route, navigation }) {
@@ -18,26 +18,24 @@ export default function OutputScreen({ route, navigation }) {
   const [isDataFetched, setIsDataFetched] = useState(false);
 
   useEffect(() => {
-    AsyncStorage.getItem(key)
-      .then((data) => {
-        const jData = JSON.parse(data);
-        const processedDatesData = Object.entries(jData.Dates).map(
-          ([day, data]) => {
-            return {
-              day,
-              ...data,
-            };
-          }
-        );
-        setJsonData(jData);
-        setDatesData(processedDatesData);
-        setIsDataFetched(true); 
-        setIsLoading(false); 
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setIsLoading(false); 
-      });
+    fetchJsonData(key).then(data => {
+      const jData = JSON.parse(data);
+      console.log("in parsing json data", jData);
+      const processedDatesData = Object.entries(jData.Dates).map(
+        ([day, data]) => {
+          return {
+            day,
+            ...data,
+          };
+        }
+      );
+      setJsonData(jData);
+      setDatesData(processedDatesData);
+      setIsDataFetched(true); 
+      setIsLoading(false); 
+    }).catch(error => {
+      console.error(error);
+    });
   }, []);
   
   function pressHandler() {
@@ -74,7 +72,6 @@ export default function OutputScreen({ route, navigation }) {
       />
       <Text style={styles.timeline}>Travel Plan {jsonData.DatesSummary}</Text>
       </View>
-      {/* <Text style={styles.timeline}>Travel</Text> */}
 
       <Text style={styles.location}>{jsonData.Location}</Text>
 

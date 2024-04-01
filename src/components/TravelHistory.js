@@ -57,7 +57,6 @@ const TravelHistory = ({ touchableCount, navigation }) => {
   const handleTouchablePress = (identifier) => {
     console.log(`Touchable ${identifier} pressed!`);
     navigation.navigate("output", {key: identifier.toString()});
-    // 执行你希望的Touchable点击事件处理逻辑
   };
 
   return (

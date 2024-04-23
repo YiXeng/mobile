@@ -3,6 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import MainScreen from "./src/screens/MainScreen";
+import Community from "./src/screens/Community";
+import Profile from "./src/screens/ProfileScreen";
 import ExampleScreen from "./src/screens/ExampleScreen";
 import OutputScreen from "./src/screens/OutputScreen";
 import UserInputScreen from "./src/screens/UserInputScreen";
@@ -18,28 +20,14 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 
-function Profile() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
 
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications!</Text>
-    </View>
-  );
-}
 
 function Home() {
   return (
     <Tab.Navigator
       initialRouteName="main"
       screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
+        tabBarActiveTintColor: '#002FA7',
         headerShown: false,
       }}>
 
@@ -54,12 +42,12 @@ function Home() {
         }}
       />
       <Tab.Screen
-        name="Notifications"
-        component={Notifications}
+        name="Community"
+        component={Community}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: 'Community',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
+            <MaterialCommunityIcons name="account-group" color={color} size={size} />
           ),
         }}
       />

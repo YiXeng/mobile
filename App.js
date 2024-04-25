@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import MainScreen from "./src/screens/MainScreen";
+import MyTravelScreen from "./src/screens/MyTravelScreen";
 import Community from "./src/screens/Community";
 import Profile from "./src/screens/ProfileScreen";
 import ExampleScreen from "./src/screens/ExampleScreen";
@@ -31,13 +32,23 @@ function Home() {
         headerShown: false,
       }}>
 
-        <Tab.Screen
-        name="main"
+      <Tab.Screen
+        name="Main"
         component={MainScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyTravel"
+        component={MyTravelScreen}
+        options={{
+          tabBarLabel: 'MyTravel',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bag-suitcase" color={color} size={size} />
           ),
         }}
       />
@@ -61,7 +72,7 @@ function Home() {
           ),
         }}
       />
-      </Tab.Navigator>
+    </Tab.Navigator>
   );
 }
 
@@ -83,4 +94,5 @@ export default function App() {
         <Stack.Screen name="day" component={DayScreen} />
       </Stack.Navigator>
     </NavigationContainer>
-  );}
+  );
+}

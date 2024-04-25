@@ -11,11 +11,10 @@ import {
     Dimensions,
     View,
 } from 'react-native'
-import Constants from 'expo-constants';
 import TravelHistory from '../components/TravelHistory';
 import DateTimeDisplay from '../components/DateTimeDisplay';
 import { getAddressFromCoordinates, getLocation } from './LocationService';
-
+import { styles } from '../styles/Homestyles';
 import { fetchAllHistoryData } from '../db/db';
 
 const MainScreen = ({ navigation }) => {
@@ -92,17 +91,6 @@ const MainScreen = ({ navigation }) => {
                         <Text style={styles.buttonText}>Get Started</Text>
                     </TouchableOpacity>
                 </ImageBackground>
-
-                <Image source={require('../../assets/time_icon.png')}
-                    style={styles.timeIcon} />
-                <Text style={styles.travelText}>Travel History</Text>
-
-                <View style={styles.historyContainer}>
-                    <Text style={styles.historyText}>History</Text>
-                    <ScrollView>
-                        <TravelHistory touchableCount={numKeys} navigation={navigation} />
-                    </ScrollView>
-                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -110,97 +98,6 @@ const MainScreen = ({ navigation }) => {
 
 
 
-const styles = StyleSheet.create({
-    background: {
-        marginTop: Constants.statusBarHeight,
-        flex: 0,
-    },
-    buttonContainer: {
-        height: 35,
-        width: 100,
-        marginHorizontal: (Dimensions.get('window').width - 170),
-        marginTop: -20,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 16,
-    },
-    historyContainer: {
-        marginHorizontal: 30,
-        marginTop: 10,
-
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    //texts
-    buttonText: {
-        fontWeight: 'bold',
-        fontSize: 12,
-    },
-    locationText: {
-        fontSize: 14,
-        marginVertical: 5,
-        fontWeight: 'bold',
-    },
-    logOutText: {
-        fontSize: 14,
-        marginVertical: 5,
-        left: (Dimensions.get('window').width - 250),
-        fontWeight: 'bold',
-    },
-    greetingText: {
-        fontSize: 26,
-        marginVertical: 5,
-        marginHorizontal: 30,
-        fontWeight: 'bold',
-    },
-    placeText: {
-        fontSize: 14,
-        color: 'white',
-        marginTop: 190,
-        marginLeft: 20,
-
-    },
-    spotText: {
-        fontSize: 24,
-        color: 'white',
-        marginLeft: 20,
-        fontWeight: 'bold'
-    },
-    travelText: {
-        fontSize: 26,
-        marginLeft: 90,
-        marginTop: -35,
-        fontWeight: 'bold'
-    },
-
-
-    //images
-    locationIcon: {
-        width: 28,
-        height: 28,
-        marginHorizontal: 10,
-    },
-    timeIcon: {
-        width: 35,
-        height: 35,
-        marginHorizontal: 30,
-
-
-    },
-    image: {
-        borderRadius: 10,
-        width: 385,
-        height: 270,
-        width: (Dimensions.get('window').width - 50),
-        marginVertical: 30,
-        marginHorizontal: 22,
-        overflow: 'hidden',
-
-
-    },
-
-});
 
 
 export default MainScreen;

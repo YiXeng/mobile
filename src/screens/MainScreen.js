@@ -11,7 +11,6 @@ import {
     Dimensions,
     View,
 } from 'react-native'
-import TravelHistory from '../components/TravelHistory';
 import DateTimeDisplay from '../components/DateTimeDisplay';
 import { getAddressFromCoordinates, getLocation } from './LocationService';
 import { styles } from '../styles/Homestyles';

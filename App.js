@@ -56,15 +56,6 @@ function Home() {
         }}
       />
       <Tab.Screen
-        name="NewTravel"
-        component={UserInputScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="plus-circle" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Community"
         component={Community}
         options={{

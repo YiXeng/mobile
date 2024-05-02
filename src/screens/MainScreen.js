@@ -42,10 +42,10 @@ const MainScreen = ({ navigation }) => {
         // Debug Purposes
         fetchAllHistoryData().then(historyData => {
             console.log('All history data:', historyData);
-          }).catch(error => {
+        }).catch(error => {
             console.error('Failed to fetch history data:', error);
-          });
-        
+        });
+
     }, []);
 
 
@@ -59,7 +59,7 @@ const MainScreen = ({ navigation }) => {
             console.error("Error fetching users:", error);
         }
     };
-    
+
     return (
         <SafeAreaView style={styles.background}>
             {console.log("Main Screen")}
@@ -69,9 +69,8 @@ const MainScreen = ({ navigation }) => {
                 <Text style={styles.locationText}>{address}</Text>
                 <Text style={styles.logOutText}>Log out</Text>
             </View>
-
+            
             <ScrollView>
-                <DateTimeDisplay />
 
                 <Text style={styles.greetingText}> Hi David !</Text>
                 <Text style={styles.greetingText}> Are you looking for a trip?</Text>
@@ -90,6 +89,14 @@ const MainScreen = ({ navigation }) => {
                         <Text style={styles.buttonText}>Get Started</Text>
                     </TouchableOpacity>
                 </ImageBackground>
+
+                <ImageBackground
+                    source={require('../../assets/backgroundPic.png')}
+                    style={styles.image}>
+                    <Text style={styles.placeText}>ON, CANADA</Text>
+                    <Text style={styles.spotText}>Riverdale Hills</Text>
+                </ImageBackground>
+
             </ScrollView>
         </SafeAreaView>
     );

@@ -69,14 +69,14 @@ const MainScreen = ({ navigation }) => {
                 <Text style={styles.locationText}>{address}</Text>
                 <Text style={styles.logOutText}>Log out</Text>
             </View>
-            
+
             <ScrollView>
 
                 <Text style={styles.greetingText}> Hi David !</Text>
                 <Text style={styles.greetingText}> Are you looking for a trip?</Text>
 
                 <ImageBackground
-                    source={require('../../assets/backgroundPic.png')}
+                    source={require('../../assets/Peak.png')}
                     style={styles.image}>
                     <Text style={styles.placeText}>ON, CANADA</Text>
                     <Text style={styles.spotText}>Riverdale Hills</Text>
@@ -90,12 +90,27 @@ const MainScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </ImageBackground>
 
+
+                <ScrollView horizontal={true} pagingEnabled={true}>
                 <ImageBackground
-                    source={require('../../assets/backgroundPic.png')}
+                    source={require('../../assets/BigSurAerial.png')}
                     style={styles.image}>
                     <Text style={styles.placeText}>ON, CANADA</Text>
                     <Text style={styles.spotText}>Riverdale Hills</Text>
                 </ImageBackground>
+                <ImageBackground
+                    source={require('../../assets/BigSurCoastline.png')}
+                    style={styles.image}>
+                    <Text style={styles.placeText}>ON, CANADA</Text>
+                    <Text style={styles.spotText}>Riverdale Hills</Text>
+                </ImageBackground>
+                <ImageBackground
+                    source={require('../../assets/BigSurWatersEdge.png')}
+                    style={styles.image}>
+                    <Text style={styles.placeText}>ON, CANADA</Text>
+                    <Text style={styles.spotText}>Riverdale Hills</Text>
+                </ImageBackground>
+                </ScrollView>
 
             </ScrollView>
         </SafeAreaView>

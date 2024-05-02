@@ -2,6 +2,9 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { useState, useEffect } from 'react';
+
+
 import MainScreen from "./src/screens/MainScreen";
 import MyTravelScreen from "./src/screens/MyTravelScreen";
 import Community from "./src/screens/Community";
@@ -11,19 +14,19 @@ import OutputScreen from "./src/screens/OutputScreen";
 import UserInputScreen from "./src/screens/UserInputScreen";
 import DayScreen from "./src/screens/DayScreen";
 
-import { Text, View } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
-
 const Stack = createNativeStackNavigator();
 
 
 
-
 function Home() {
+  const [numKeys, setNumKeys] = useState();
+
   return (
     <Tab.Navigator
       initialRouteName="main"
@@ -77,6 +80,7 @@ function Home() {
 }
 
 
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -87,6 +91,9 @@ export default function App() {
         }}
       >
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="MyTravel" component={MyTravelScreen} />
+        <Stack.Screen name="Community" component={Community} />
+        <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="main" component={MainScreen} />
         <Stack.Screen name="example" component={ExampleScreen} />
         <Stack.Screen name="output" component={OutputScreen} />

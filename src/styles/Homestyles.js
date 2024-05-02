@@ -100,7 +100,7 @@ export const styles = StyleSheet.create({
         width: 385,
         height: 270,
         width: (Dimensions.get('window').width - 50),
-        marginVertical: 30,
+        marginVertical: 15,
         marginHorizontal: 22,
         overflow: 'hidden',
 

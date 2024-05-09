@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         height: 35,
         width: 100,
         marginHorizontal: (Dimensions.get('window').width - 170),
-        marginTop: -20,
+        marginTop: 55,
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     placeText: {
         fontSize: 14,
         color: 'white',
-        marginTop: 190,
+        marginTop: 20,
         marginLeft: 20,
 
     },
@@ -106,5 +106,29 @@ export const styles = StyleSheet.create({
 
 
     },
+    image_start: {
+        borderRadius: 10,
+        width: 385,
+        height: 170,
+        width: (Dimensions.get('window').width - 50),
+        marginVertical: 15,
+        marginHorizontal: 22,
+        overflow: 'hidden',
+
+
+    },
+
+    image_square: {
+        borderRadius: 10,
+        width: 175,
+        height: 170,
+        marginVertical: 15,
+        marginHorizontal: 10,
+        overflow: 'hidden',
+
+
+    },
+
+
 
 });

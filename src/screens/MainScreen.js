@@ -77,7 +77,7 @@ const MainScreen = ({ navigation }) => {
 
                 <ImageBackground
                     source={require('../../assets/Peak.png')}
-                    style={styles.image}>
+                    style={styles.image_start}>
                     <Text style={styles.placeText}>ON, CANADA</Text>
                     <Text style={styles.spotText}>Riverdale Hills</Text>
                     <TouchableOpacity
@@ -89,6 +89,27 @@ const MainScreen = ({ navigation }) => {
                         <Text style={styles.buttonText}>Get Started</Text>
                     </TouchableOpacity>
                 </ImageBackground>
+
+                <ScrollView horizontal={true} pagingEnabled={true}>
+                    <ImageBackground
+                        source={require('../../assets/BigSurAerial.png')}
+                        style={styles.image_square}>
+                        <Text style={styles.placeText}>ON, CANADA</Text>
+                        <Text style={styles.spotText}>Riverdale Hills</Text>
+                    </ImageBackground>
+                    <ImageBackground
+                        source={require('../../assets/BigSurCoastline.png')}
+                        style={styles.image_square}>
+                        <Text style={styles.placeText}>ON, CANADA</Text>
+                        <Text style={styles.spotText}>Riverdale Hills</Text>
+                    </ImageBackground>
+                    <ImageBackground
+                        source={require('../../assets/BigSurWatersEdge.png')}
+                        style={styles.image_square}>
+                        <Text style={styles.placeText}>ON, CANADA</Text>
+                        <Text style={styles.spotText}>Riverdale Hills</Text>
+                    </ImageBackground>
+                </ScrollView>
 
 
                 <ScrollView horizontal={true} pagingEnabled={true}>
